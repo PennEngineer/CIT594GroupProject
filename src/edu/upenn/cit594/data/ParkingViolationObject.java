@@ -1,21 +1,27 @@
 package edu.upenn.cit594.data;
 
 public class ParkingViolationObject {
-	private String timeStamp;
-	private String fine;
-	private String description;
-	private String identifier;
-	private String state;
-	private String zipcode;
+	private final String timeStamp;
+	private final String fine;
+	private final String description;
+	private final String vehicleIdentifier;
+	private final String state;
+	private final String ticketIdentifier;
+	private final String zipcode;
 	
-	public ParkingViolationObject(String timeStamp, String fine, String description, String identifier, String state, String zipcode) {
+	public ParkingViolationObject(String timeStamp, String fine, String description, String vehicleIdentifier,
+			String state, String ticketIdentifier, String zipcode) {
+		super();
 		this.timeStamp = timeStamp;
 		this.fine = fine;
 		this.description = description;
-		this.identifier = identifier;
+		this.vehicleIdentifier = vehicleIdentifier;
 		this.state = state;
+		this.ticketIdentifier = ticketIdentifier;
 		this.zipcode = zipcode;
 	}
+
+
 
 	public String getTimeStamp() {
 		return timeStamp;
@@ -29,8 +35,12 @@ public class ParkingViolationObject {
 		return description;
 	}
 
-	public String getIdentifier() {
-		return identifier;
+	public String getVehicleIdentifier() {
+		return vehicleIdentifier;
+	}
+
+	public String getTicketIdentifier() {
+		return ticketIdentifier;
 	}
 
 	public String getState() {
