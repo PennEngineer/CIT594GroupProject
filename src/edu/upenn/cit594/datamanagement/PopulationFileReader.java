@@ -5,18 +5,18 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import edu.upenn.cit594.data.populationObject;
+import edu.upenn.cit594.data.PopulationObject;
 
-public class populationFileReader {
+public class PopulationFileReader {
 	
 	protected String inputFile;
-	protected List<populationObject> populationObjects  = new ArrayList<populationObject>();
+	protected List<PopulationObject> populationObjects  = new ArrayList<PopulationObject>();
 	
-	public populationFileReader(String inputFile) {
+	public PopulationFileReader(String inputFile) {
 		this.inputFile = inputFile;
 	}
 	
-	public List<populationObject> getAllPopulationObjects() {
+	public List<PopulationObject> getAllPopulationObjects() {
 		File inFile = new File(inputFile);
 		try {
 			Scanner in = new Scanner(inFile,"UTF-8");
@@ -24,7 +24,7 @@ public class populationFileReader {
 				String temp = in.nextLine();
 				try {
 					String[] tempArray = temp.split(" ");
-					populationObject object = new populationObject(tempArray[0], tempArray[1]);
+					PopulationObject object = new PopulationObject(tempArray[0], tempArray[1]);
 					populationObjects.add(object);
 
 				} catch (Exception e) {

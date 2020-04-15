@@ -1,11 +1,11 @@
 package edu.upenn.cit594.data;
 
-public class populationObject {
+public class PopulationObject {
 	
 	private String zipCode;
 	private String populationString;
 	
-	public populationObject(String zipCode, String populationString) {
+	public PopulationObject(String zipCode, String populationString) {
 		this.zipCode = zipCode;
 		this.populationString = populationString;
 	}
