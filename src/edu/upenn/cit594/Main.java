@@ -13,7 +13,7 @@ public class Main {
 			System.exit(0);
 		}
 		if(!args[0].toLowerCase().equals("json") && !args[0].toLowerCase().equals("csv")) {
-			System.out.println("Please specify either json or text.");
+			System.out.println("Please specify either json or csv.");
 			System.exit(0);
 		}
 		File input = new File(args[1]);
@@ -34,10 +34,6 @@ public class Main {
 		
 		logName = args[4];
 		
-		
-
-		
-
 	}
 
 }

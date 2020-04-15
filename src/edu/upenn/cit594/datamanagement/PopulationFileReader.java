@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 import edu.upenn.cit594.data.PopulationObject;
 
-public class PopulationFileReader {
+public class PopulationFileReader implements Reader {
 	
 	protected String inputFile;
 	protected List<PopulationObject> populationObjects  = new ArrayList<PopulationObject>();
@@ -16,7 +16,8 @@ public class PopulationFileReader {
 		this.inputFile = inputFile;
 	}
 	
-	public List<PopulationObject> getAllPopulationObjects() {
+	@Override
+	public List<PopulationObject> getAllObjects() {
 		File inFile = new File(inputFile);
 		try {
 			Scanner in = new Scanner(inFile,"UTF-8");
@@ -39,8 +40,4 @@ public class PopulationFileReader {
 		}	
 		return populationObjects;
 	}
-	
-	
-	
-
 }

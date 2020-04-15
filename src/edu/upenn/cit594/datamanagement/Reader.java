@@ -7,7 +7,7 @@ import edu.upenn.cit594.data.ParkingViolationObject;
 
 public interface Reader {
 	
-	public List<ParkingViolationObject> getAllParkingViolationObjects();
+	public List<?> getAllObjects();
 
 }
 

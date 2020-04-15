@@ -18,7 +18,7 @@ public class CSVFileReader implements Reader {
 	}
 	
 	@Override
-	public List<ParkingViolationObject> getAllParkingViolationObjects() {
+	public List<ParkingViolationObject> getAllObjects() {
 		File inFile = new File(inputFile);
 		try {
 			Scanner in = new Scanner(inFile,"UTF-8");

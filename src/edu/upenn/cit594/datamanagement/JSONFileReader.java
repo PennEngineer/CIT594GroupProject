@@ -18,7 +18,7 @@ public class JSONFileReader implements Reader {
 	}
 
 	@Override
-	public List<ParkingViolationObject> getAllParkingViolationObjects() {
+	public List<ParkingViolationObject> getAllObjects() {
 		// create a parser
 		JSONParser parser = new JSONParser();
 		
