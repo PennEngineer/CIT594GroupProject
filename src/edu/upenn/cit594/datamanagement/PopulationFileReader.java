@@ -15,7 +15,7 @@ public class PopulationFileReader implements Reader {
 	public PopulationFileReader(String inputFile) {
 		this.inputFile = inputFile;
 	}
-	
+
 	@Override
 	public List<PopulationObject> getAllObjects() {
 		File inFile = new File(inputFile);
