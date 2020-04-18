@@ -49,7 +49,7 @@ public class CommandLineUserInterface {
     //choice 1
     protected void doTotalPopulationForAllZipCodes() {
         //calculate total population for all ZIP codes
-
+        System.out.println(processor.calculatePopulation());
     }
 
     //choice 2
