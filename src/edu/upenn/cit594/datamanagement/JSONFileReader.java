@@ -11,14 +11,13 @@ import edu.upenn.cit594.data.*;
 public class JSONFileReader implements Reader {
 	
 	protected String inputFile;
-	protected List<ParkingViolationObject> violationObjects = new ArrayList<ParkingViolationObject>();
 	
 	public JSONFileReader(String inputFile) {
 		this.inputFile = inputFile;
 	}
 
-	@Override
-	public List<ParkingViolationObject> getAllObjects() {
+	public ArrayList<ParkingViolationObject> getParkingViolationObjects() {
+		ArrayList<ParkingViolationObject> violationObjects = new ArrayList<>();
 		// create a parser
 		JSONParser parser = new JSONParser();
 		
