@@ -1,7 +1,6 @@
 package edu.upenn.cit594;
 
 import java.io.File;
-import edu.upenn.cit594.data.PropertyObject;
 
 public class Main {
 	

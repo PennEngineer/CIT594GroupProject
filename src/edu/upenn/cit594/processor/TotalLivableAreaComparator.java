@@ -8,8 +8,15 @@ public class TotalLivableAreaComparator implements AverageComparator {
 
 	@Override
 	public double getAverage(ArrayList<Property> properties, int zipCode) {
-		// TODO Auto-generated method stub
-		return 0;
+		int residentials = 0;
+		int total = 0;
+		for(Property propertyObject : properties) {
+			if(Integer.parseInt(propertyObject.getZipCode()) == zipCode) {
+				total += Integer.parseInt(propertyObject.getTotalLivableArea());
+				residentials++;
+			}
+		}
+		return total/residentials;
 	}
 
 }
