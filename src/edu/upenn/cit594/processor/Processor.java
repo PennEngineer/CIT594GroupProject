@@ -91,6 +91,12 @@ public class Processor {
 		}
 		return sortedTotalFinesPerCapitaByZipCode;
 	}
+	
+	//step 3 & 4 -- calculate average market value or total livable area by number of residences
+	public double getAverage(AverageComparator comparator, int zipcode) {
+		
+		return comparator.getAverage(properties, zipcode);
+	}
 
 
 

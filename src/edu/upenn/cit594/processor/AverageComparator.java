@@ -4,6 +4,6 @@ import edu.upenn.cit594.data.Property;
 
 public interface AverageComparator {
 	
-	public double getAverage(ArrayList<Property> properties, String zipCode);
+	public double getAverage(ArrayList<Property> properties, int zipCode);
 
 }

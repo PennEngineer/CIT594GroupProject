@@ -1,6 +1,8 @@
 package edu.upenn.cit594.ui;
 
+import edu.upenn.cit594.processor.MarketValueComparator;
 import edu.upenn.cit594.processor.Processor;
+import edu.upenn.cit594.processor.TotalLivableAreaComparator;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -62,13 +64,15 @@ public class CommandLineUserInterface {
         System.out.println("Please enter a ZIP code.");
         //if user enters an incorrect zip code, or a zip code not valid in the input files, display 0.
         int zipcodeChoice = in.nextInt();
-
-
+        System.out.println(processor.getAverage(new MarketValueComparator(), zipcodeChoice));
     }
 
     //choice 4
     protected void doAverageTotalLivableArea() {
-
+        System.out.println("Please enter a ZIP code.");
+        //if user enters an incorrect zip code, or a zip code not valid in the input files, display 0.
+        int zipcodeChoice = in.nextInt();
+        System.out.println(processor.getAverage(new TotalLivableAreaComparator(), zipcodeChoice));
     }
 
     //choice 5
