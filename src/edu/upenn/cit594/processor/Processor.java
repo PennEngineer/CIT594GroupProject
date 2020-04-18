@@ -10,6 +10,7 @@ import edu.upenn.cit594.datamanagement.Reader;
 public class Processor {
 
 	protected Reader reader;
+	protected ArrayList<ParkingViolationObject> parkingViolations = reader.getParkingViolationObjects();
 	
 	public Processor(Reader reader) {
 		this.reader = reader;
