@@ -68,7 +68,7 @@ public class Processor {
 
 	//helper method for truncation of values to the required decimal places, HAS to be in STRING Format, and converted
 	//for later use
-	public static String truncate(String value, int places) {
+	private static String truncate(String value, int places) {
 		return new BigDecimal(value)
 				.setScale(places, RoundingMode.DOWN)
 				.stripTrailingZeros()
