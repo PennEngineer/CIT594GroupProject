@@ -7,17 +7,16 @@ import java.util.List;
 import java.util.Scanner;
 import edu.upenn.cit594.data.PopulationObject;
 
-public class PopulationFileReader implements Reader {
+public class PopulationFileReader {
 	
 	protected String inputFile;
-	protected List<PopulationObject> populationObjects  = new ArrayList<PopulationObject>();
 	
 	public PopulationFileReader(String inputFile) {
 		this.inputFile = inputFile;
 	}
 
-	@Override
-	public List<PopulationObject> getAllObjects() {
+	public ArrayList<PopulationObject> getPopulationObjects() {
+		ArrayList<PopulationObject> populationObjects  = new ArrayList<>();
 		File inFile = new File(inputFile);
 		try {
 			Scanner in = new Scanner(inFile,"UTF-8");
