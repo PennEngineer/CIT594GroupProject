@@ -45,6 +45,24 @@ public class Processor {
 		}
 		return popHashMap;
 	}
+	
+	//helper method to get total number of tickets per zipcode in hashmap form
+		private HashMap<String, Integer> totalTicketsPerZipCode() {
+			HashMap<String, Integer> ticketsHashMap = new HashMap<>();
+			for (ParkingViolationObject p : this.parkingViolations) {
+				if(p.getZipcode().isBlank() || p.getZipcode().isEmpty() || p.getZipcode() == null || p.getZipcode().equals("")) {
+					continue;
+				}else {
+					if(ticketsHashMap.containsKey(p.getZipcode())) {
+						int count = ticketsHashMap.get(p.getZipcode()) + 1;
+						ticketsHashMap.put(p.getZipcode(), count);
+					}else {
+						ticketsHashMap.put(p.getZipcode(), 1);
+					}
+				}
+			}
+			return ticketsHashMap;
+		}
 
 	//helper method for aggregating populations by zipcode: total aggregate amount of fines for that zipcode
 	//does not read in any null values, or if there is no fine
@@ -117,6 +135,13 @@ public class Processor {
 		}
 
 		return Double.parseDouble(truncate(totalMarketValue/populationOfZipCode, 0));
+	}
+	
+	//6 Display the zip code with the lowest ticket number per capita within the user budget
+	public String safeMethod(double budget) {
+		
+		
+		return "";
 	}
 
 
