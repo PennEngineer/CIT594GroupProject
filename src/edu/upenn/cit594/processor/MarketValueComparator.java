@@ -19,6 +19,7 @@ public class MarketValueComparator implements AverageComparator {
 				}
 			}
 		}
+		if(total == 0) return 0;
 		return total/residentials;
 	}
 }
