@@ -19,6 +19,8 @@ public class MarketValueComparator implements AverageComparator {
 				}
 			}
 		}
+		System.out.println("total " + total);
+		System.out.println("residentials " + residentials);
 		if(total == 0) return 0;
 		return total/residentials;
 	}
