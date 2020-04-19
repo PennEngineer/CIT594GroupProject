@@ -52,6 +52,8 @@ public class CommandLineUserInterface {
     protected void doTotalPopulationForAllZipCodes() {
         //calculate total population for all ZIP codes
         System.out.println(processor.calculatePopulation());
+        //re-prompt user
+        start();
     }
 
     //choice 2
