@@ -91,7 +91,14 @@ public class CommandLineUserInterface {
 
     //choice 5
     protected void doTotalResidentialMarketValuePerCapita() {
+        System.out.println("Please enter a ZIP code.");
+        //if user enters an incorrect zip code, or a zip code not valid in the input files, display 0.
+        int zipcodeChoice = in.nextInt();
+        String valueOfZip = String.valueOf(zipcodeChoice);
+        processor.getMarketValuePerCapita(valueOfZip);
 
+        //re-prompt user
+        start();
     }
 
     //choice 6

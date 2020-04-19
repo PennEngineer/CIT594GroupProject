@@ -165,12 +165,14 @@ public class Processor {
 
 
 //	used for testing -- delete after
-//	public static void main(String[] args) {
-//		//must import properties file
+	public static void main(String[] args) {
+		//must import properties file
 //		CSVPropertyReader cv = new CSVPropertyReader("properties.csv");
 //		Reader r = new JSONFileReader("parking.json");
 //		PopulationFileReader pr = new PopulationFileReader("population.txt");
 //		Processor p = new Processor(r, pr.getPopulationObjects(), cv.getPropertyObjects());
-//		System.out.println(p.getMarketValuePerCapita("19148"));
-//	}
+//		for (Integer zip : p.totalFinePerCapita().keySet()) {
+//			System.out.println(zip + " " + p.totalFinePerCapita().get(zip));
+//		}
+	}
 }
