@@ -57,6 +57,12 @@ public class CommandLineUserInterface {
     //choice 2
     protected void doParkingFinesPerCapitaForAllZipCodes() {
         //calculate "ZIPCODE fine", i.e. 19103 0.0284 (truncated)
+        for (Integer zip : processor.totalFinePerCapita().keySet()) {
+            System.out.println(zip + " " + processor.totalFinePerCapita().get(zip));
+        }
+
+        //re-prompt user
+        start();
     }
 
     //choice 3
@@ -65,6 +71,9 @@ public class CommandLineUserInterface {
         //if user enters an incorrect zip code, or a zip code not valid in the input files, display 0.
         int zipcodeChoice = in.nextInt();
         System.out.println(processor.getAverage(new MarketValueComparator(), zipcodeChoice));
+
+        //re-prompt user
+        start();
     }
 
     //choice 4
@@ -73,6 +82,9 @@ public class CommandLineUserInterface {
         //if user enters an incorrect zip code, or a zip code not valid in the input files, display 0.
         int zipcodeChoice = in.nextInt();
         System.out.println(processor.getAverage(new TotalLivableAreaComparator(), zipcodeChoice));
+
+        //re-prompt user
+        start();
     }
 
     //choice 5
