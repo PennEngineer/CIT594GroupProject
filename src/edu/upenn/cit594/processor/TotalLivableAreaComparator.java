@@ -9,11 +9,15 @@ public class TotalLivableAreaComparator implements AverageComparator {
 	@Override
 	public double getAverage(ArrayList<Property> properties, int zipCode) {
 		int residentials = 0;
-		int total = 0;
+		double total = 0;
 		for(Property propertyObject : properties) {
-			if(Integer.parseInt(propertyObject.getZipCode()) == zipCode) {
-				total += Integer.parseInt(propertyObject.getTotalLivableArea());
-				residentials++;
+			if(propertyObject.getZipCode().contains(Integer.toString(zipCode))) {
+				if(propertyObject.getTotalLivableArea() == null || propertyObject.getTotalLivableArea().equals("") || propertyObject.getTotalLivableArea().isEmpty()) {
+					continue;
+				}else {
+					total += Double.parseDouble(propertyObject.getTotalLivableArea());
+					residentials++;
+				}
 			}
 		}
 		return total/residentials;
