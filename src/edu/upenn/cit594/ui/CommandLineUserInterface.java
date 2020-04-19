@@ -95,7 +95,7 @@ public class CommandLineUserInterface {
         //if user enters an incorrect zip code, or a zip code not valid in the input files, display 0.
         int zipcodeChoice = in.nextInt();
         String valueOfZip = String.valueOf(zipcodeChoice);
-        processor.getMarketValuePerCapita(valueOfZip);
+        System.out.println(processor.getMarketValuePerCapita(valueOfZip));
 
         //re-prompt user
         start();
