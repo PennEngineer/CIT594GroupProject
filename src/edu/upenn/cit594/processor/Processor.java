@@ -113,7 +113,7 @@ public class Processor {
 	}
 	
 	//step 5 - total residential value per capita
-	public double getMarketValuePerCapita(String zipCode) {
+	public int getMarketValuePerCapita(String zipCode) {
 		double totalMarketValue = 0;
 		String regex = "^[0-9]{5}$";
 		//if it does not meet the zip-code criteria
@@ -121,21 +121,22 @@ public class Processor {
 			return 0;
 		}
 		//if the zip-code is not in the population file containing all zipcodes
-		Double populationOfZipCode;
 		if (!populationInHashMapForm().containsKey(Integer.parseInt(zipCode))) {
 			return 0;
-		} else {
-			int zipCodeValue = Integer.parseInt(zipCode);
-			populationOfZipCode = populationInHashMapForm().get(zipCodeValue);
 		}
+		int zipCodeValue = Integer.parseInt(zipCode);
+		double populationOfZipCode = populationInHashMapForm().get(zipCodeValue);
+		System.out.println("Population of zipcode: " + populationOfZipCode);
 		for (Property p : this.properties) {
 			//if zipcode value matches, add to totalMarketValue
-			if (p.getZipCode().equals(zipCode) && populationInHashMapForm().containsKey(Integer.parseInt(zipCode))) {
+			if (p.getZipCode().equals(zipCode)) {
+				System.out.println(zipCode);
 				totalMarketValue += Double.parseDouble(p.getMarketValue());
 			}
 		}
+		System.out.println("Total market value: "  + totalMarketValue);
 
-		return Double.parseDouble(truncate(totalMarketValue/populationOfZipCode, 0));
+		return Integer.parseInt(truncate(totalMarketValue/populationOfZipCode, 0));
 	}
 	
 	//6 Display the zip code with the lowest ticket number per capita within the user budget
@@ -164,14 +165,12 @@ public class Processor {
 
 
 //	used for testing -- delete after
-	public static void main(String[] args) {
+//	public static void main(String[] args) {
 //		//must import properties file
 //		CSVPropertyReader cv = new CSVPropertyReader("properties.csv");
 //		Reader r = new JSONFileReader("parking.json");
 //		PopulationFileReader pr = new PopulationFileReader("population.txt");
 //		Processor p = new Processor(r, pr.getPopulationObjects(), cv.getPropertyObjects());
-//		for (Integer zip : p.totalFinePerCapita().keySet()) {
-//			System.out.println(zip + " " + p.totalFinePerCapita().get(zip));
-//		}
-	}
+//		System.out.println(p.getMarketValuePerCapita("19148"));
+//	}
 }

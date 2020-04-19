@@ -13,6 +13,7 @@ public class CSVPropertyReader {
         this.inputFile = fileName;
     }
 
+
     public ArrayList<Property> getPropertyObjects() {
         ArrayList<Property> properties = new ArrayList<>();
         try {
@@ -35,11 +36,14 @@ public class CSVPropertyReader {
                     totalLivableArea = i;
                 }
             }
-            String line = null;
+            String line;
             while ((line = br.readLine()) != null) {
                 String[] fields = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-                Property p = new Property(fields[marketValue], fields[totalLivableArea], fields[zipCode]);
-                properties.add(p);
+                String zipCodeValue = fields[zipCode];
+                if (zipCodeValue != null && zipCodeValue.length() >= 5) {
+                    Property p = new Property(fields[marketValue], fields[totalLivableArea], zipCodeValue.substring(0,5));
+                    properties.add(p);
+                }
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -48,5 +52,6 @@ public class CSVPropertyReader {
         }
         return properties;
     }
+
 
 }
