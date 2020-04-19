@@ -93,19 +93,31 @@ public class Processor {
 		return Integer.parseInt(Double.toString(comparator.getAverage(properties, zipcode)));
 	}
 	
-	//step 5
-	public double getMarketValuePerCapita(String zipcode) {
-			
-		
-		
-		
-		return 0;
+	//step 5 - total residential value per capita
+	public double getMarketValuePerCapita(String zipCode) {
+		double totalMarketValue = 0;
+		String regex = "^[0-9]{5}$";
+		//if it does not meet the zip-code criteria
+		if (zipCode == null || zipCode.isEmpty() || !zipCode.matches(regex)) {
+			return 0;
+		}
+		//if the zip-code is not in the population file containing all zipcodes
+		Double populationOfZipCode;
+		if (!populationInHashMapForm().containsKey(Integer.parseInt(zipCode))) {
+			return 0;
+		} else {
+			int zipCodeValue = Integer.parseInt(zipCode);
+			populationOfZipCode = populationInHashMapForm().get(zipCodeValue);
+		}
+		for (Property p : this.properties) {
+			//if zipcode value matches, add to totalMarketValue
+			if (p.getZipCode().equals(zipCode) && populationInHashMapForm().containsKey(Integer.parseInt(zipCode))) {
+				totalMarketValue += Double.parseDouble(p.getMarketValue());
+			}
+		}
+
+		return Double.parseDouble(truncate(totalMarketValue/populationOfZipCode, 0));
 	}
-
-	//step 5 -- total residential market value per capita
-
-
-
 
 
 
