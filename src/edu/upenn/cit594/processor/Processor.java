@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.TreeMap;
 
 import edu.upenn.cit594.data.ParkingViolationObject;
@@ -68,25 +67,21 @@ public class Processor {
 
 	//helper method for truncation of values to the required decimal places, HAS to be in STRING Format, and converted
 	//for later use
-	private static String truncate(String value, int places) {
-		return new BigDecimal(value)
-				.setScale(places, RoundingMode.DOWN)
-				.stripTrailingZeros()
-				.toString();
+	private static String truncate(Double value, int places) {
+		return new BigDecimal(value).setScale(places, RoundingMode.DOWN).toString();
 	}
 
 
 	//step 2 -- calculate total fine per capita
 	//use of tree map to sort key of zipcodes
-	public TreeMap<Integer, Double> totalFinePerCapita() {
-		TreeMap<Integer, Double> sortedTotalFinesPerCapitaByZipCode = new TreeMap<>();
+	public TreeMap<Integer, String> totalFinePerCapita() {
+		TreeMap<Integer, String> sortedTotalFinesPerCapitaByZipCode = new TreeMap<>();
 		for (Integer zipCode : totalAggregateFineByZipCode().keySet()) {
 			if (populationInHashMapForm().containsKey(zipCode)) {
 				double zipCodePopulation = populationInHashMapForm().get(zipCode);
 				double fineInZipCode = totalAggregateFineByZipCode().get(zipCode);
-				double zipCodeFinePerCapita = fineInZipCode / zipCodePopulation;
-				String stringForm = truncate(String.valueOf(zipCodeFinePerCapita), 4);
-				sortedTotalFinesPerCapitaByZipCode.put(zipCode, Double.parseDouble(stringForm));
+				double zipCodeFinePerCapita = fineInZipCode/zipCodePopulation;
+				sortedTotalFinesPerCapitaByZipCode.put(zipCode, truncate(zipCodeFinePerCapita, 4));
 			}
 		}
 		return sortedTotalFinesPerCapitaByZipCode;
@@ -95,7 +90,7 @@ public class Processor {
 	//step 3 & 4 -- calculate average market value or total livable area by number of residences
 	public int getAverage(AverageComparator comparator, int zipcode) {
 		
-		return Integer.parseInt(truncate(Double.toString(comparator.getAverage(properties, zipcode)),0));
+		return Integer.parseInt(Double.toString(comparator.getAverage(properties, zipcode)));
 	}
 	
 	//step 5
@@ -107,12 +102,15 @@ public class Processor {
 		return 0;
 	}
 
+	//step 5 -- total residential market value per capita
 
 
 
 
-	//used for testing -- delete after
-//	public static void main(String[] args) {
+
+
+//	used for testing -- delete after
+	public static void main(String[] args) {
 //		//must import properties file
 //		CSVPropertyReader cv = new CSVPropertyReader("properties.csv");
 //		Reader r = new JSONFileReader("parking.json");
@@ -121,49 +119,5 @@ public class Processor {
 //		for (Integer zip : p.totalFinePerCapita().keySet()) {
 //			System.out.println(zip + " " + p.totalFinePerCapita().get(zip));
 //		}
-//	}
-	//values I got from the program running: (took 1 min 50 secs)
-//	        19102 6.9347
-//			19103 4.9118
-//			19104 1.2435
-//			19106 4.1227
-//			19107 6.2616
-//			19111 0.0401
-//			19114 0.0021
-//			19118 0.3168
-//			19119 0.0609
-//			19120 0.1605
-//			19121 0.2897
-//			19122 0.1353
-//			19123 1.9564
-//			19124 0.174
-//			19125 0.1098
-//			19126 0.0764
-//			19127 1.9611
-//			19128 0.0797
-//			19129 0.3235
-//			19130 1.6743
-//			19131 0.0532
-//			19132 0.1774
-//			19133 0.1458
-//			19134 0.114
-//			19135 0.0912
-//			19136 0.0546
-//			19138 0.0215
-//			19139 0.4214
-//			19140 0.3243
-//			19141 0.4757
-//			19142 0.1878
-//			19143 0.0909
-//			19144 0.2852
-//			19145 0.295
-//			19146 0.9006
-//			19147 1.8546
-//			19148 0.3692
-//			19149 0.0859
-//			19150 0.0306
-//			19151 0.0505
-//			19152 0.0364
-//			19153 0.0325
-	
+	}
 }
