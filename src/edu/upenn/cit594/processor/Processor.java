@@ -93,9 +93,18 @@ public class Processor {
 	}
 	
 	//step 3 & 4 -- calculate average market value or total livable area by number of residences
-	public double getAverage(AverageComparator comparator, int zipcode) {
+	public int getAverage(AverageComparator comparator, int zipcode) {
 		
-		return Double.parseDouble(truncate(Double.toString(comparator.getAverage(properties, zipcode)),0));
+		return Integer.parseInt(truncate(Double.toString(comparator.getAverage(properties, zipcode)),0));
+	}
+	
+	//step 5
+	public double getMarketValuePerCapita(String zipcode) {
+		
+		
+		
+		
+		return 0;
 	}
 
 
