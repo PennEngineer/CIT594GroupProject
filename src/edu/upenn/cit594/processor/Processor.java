@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.TreeMap;
 
 import edu.upenn.cit594.data.ParkingViolationObject;
@@ -138,10 +139,26 @@ public class Processor {
 	}
 	
 	//6 Display the zip code with the lowest ticket number per capita within the user budget
-	public String safeMethod(double budget) {
+	public TreeMap<String, Double> safeMethod(double budget) {
 		
+		//get number of tickets per zipcode
+		HashMap<String, Integer> ticketsHashMap = totalTicketsPerZipCode();
+		HashMap<Integer, Double> popHashMap = populationInHashMapForm();
+		TreeMap<String, Double> safeZipCodeTreeMap = new TreeMap<>();
 		
-		return "";
+		for (Map.Entry<Integer, Double> entry : popHashMap.entrySet()) {
+		    String zipCode = Integer.toString(entry.getKey());
+			Double popForZipCode = entry.getValue();
+			int ticketNumber = ticketsHashMap.get(zipCode);
+			int marketValue = getAverage(new MarketValueComparator(), Integer.parseInt(zipCode));
+			Double ticketPerCapita = ticketNumber / popForZipCode;
+			if(marketValue > budget) {
+				continue;
+			}else {
+				safeZipCodeTreeMap.put(zipCode, ticketPerCapita);
+			}
+		}
+		return safeZipCodeTreeMap;
 	}
 
 
