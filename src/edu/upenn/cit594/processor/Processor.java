@@ -51,9 +51,11 @@ public class Processor {
 		private HashMap<String, Integer> totalTicketsPerZipCode() {
 			HashMap<String, Integer> ticketsHashMap = new HashMap<>();
 			for (ParkingViolationObject p : this.parkingViolations) {
-				if(p.getZipcode().isBlank() || p.getZipcode().isEmpty() || p.getZipcode() == null || p.getZipcode().equals("")) {
+				if(p.getZipcode() == null || p.getZipcode().length() == 0) {
 					continue;
-				}else {
+				}
+				else {
+					System.out.println("THIS SHOULD NOT BE NULL " + p.getZipcode());
 					if(ticketsHashMap.containsKey(p.getZipcode())) {
 						int count = ticketsHashMap.get(p.getZipcode()) + 1;
 						ticketsHashMap.put(p.getZipcode(), count);
@@ -148,14 +150,24 @@ public class Processor {
 		TreeMap<String, Double> safeZipCodeTreeMap = new TreeMap<>();
 		
 		for (Map.Entry<Integer, Double> entry : popHashMap.entrySet()) {
+			System.out.println("Zip Code: " + entry.getKey());
 		    String zipCode = Integer.toString(entry.getKey());
+		    System.out.println("Pop " + entry.getValue());
 			Double popForZipCode = entry.getValue();
-			int ticketNumber = ticketsHashMap.get(zipCode);
+			int ticketNumber;
+			if(ticketsHashMap.get(zipCode) == null) {
+				ticketNumber = 0;
+			}
+			else {
+				ticketNumber = ticketsHashMap.get(zipCode);
+			}
 			int marketValue = getAverage(new MarketValueComparator(), Integer.parseInt(zipCode));
+			System.out.println("market value : " + marketValue);
 			Double ticketPerCapita = ticketNumber / popForZipCode;
 			if(marketValue > budget) {
 				continue;
 			}else {
+				System.out.println(zipCode + " " + ticketPerCapita + " " + marketValue);
 				safeZipCodeTreeMap.put(zipCode, ticketPerCapita);
 			}
 		}
