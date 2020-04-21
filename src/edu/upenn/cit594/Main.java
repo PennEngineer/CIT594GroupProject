@@ -9,6 +9,7 @@ import edu.upenn.cit594.datamanagement.JSONFileReader;
 import edu.upenn.cit594.datamanagement.PopulationFileReader;
 import edu.upenn.cit594.datamanagement.Reader;
 import edu.upenn.cit594.processor.Processor;
+import edu.upenn.cit594.ui.CommandLineUserInterface;
 
 public class Main {
 
@@ -49,7 +50,8 @@ public class Main {
 		PopulationFileReader populationReader = new PopulationFileReader(args[3]);
 		Logger.initializeName(args[4]);
 		Processor processor = new Processor(reader, populationReader.getPopulationObjects(), propertyReader.getPropertyObjects());
-		
+		CommandLineUserInterface commandLineInterface = new CommandLineUserInterface(processor);
+		commandLineInterface.start();
 	}
 
 }
