@@ -50,6 +50,7 @@ public class Main {
 		Processor processor = new Processor(reader, populationReader.getPopulationObjects(), propertyReader.getPropertyObjects());
 		CommandLineUserInterface commandLineInterface = new CommandLineUserInterface(processor);
 		commandLineInterface.start();
+		Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + " " + args[1] + " " + args[2] + " " + args[3]);
 	}
 
 }

@@ -1,5 +1,6 @@
 package edu.upenn.cit594.ui;
 
+import edu.upenn.cit594.logging.Logger;
 import edu.upenn.cit594.processor.MarketValueComparator;
 import edu.upenn.cit594.processor.Processor;
 import edu.upenn.cit594.processor.TotalLivableAreaComparator;
@@ -29,6 +30,8 @@ public class CommandLineUserInterface {
         System.out.println("To show the total residential market value per capita for a specified ZIP code, enter 5.");
         System.out.println("To show a list of ticket number per capita for ZIP codes within your budget, enter 6.");
         int choice = in.nextInt();
+        Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  User Selection: " + choice);
+        
         if (choice == 0) {
             System.exit(1);
         } else if (choice == 1) {
@@ -74,6 +77,7 @@ public class CommandLineUserInterface {
         System.out.println("Please enter a ZIP code.");
         //if user enters an incorrect zip code, or a zip code not valid in the input files, display 0.
         int zipcodeChoice = in.nextInt();
+        Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  User Selection: " + zipcodeChoice);
         System.out.println(processor.getAverage(new MarketValueComparator(), zipcodeChoice));
 
         //re-prompt user
@@ -85,6 +89,7 @@ public class CommandLineUserInterface {
         System.out.println("Please enter a ZIP code.");
         //if user enters an incorrect zip code, or a zip code not valid in the input files, display 0.
         int zipcodeChoice = in.nextInt();
+        Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  User Selection: " + zipcodeChoice);
         System.out.println(processor.getAverage(new TotalLivableAreaComparator(), zipcodeChoice));
 
         //re-prompt user
@@ -96,6 +101,7 @@ public class CommandLineUserInterface {
         System.out.println("Please enter a ZIP code.");
         //if user enters an incorrect zip code, or a zip code not valid in the input files, display 0.
         int zipcodeChoice = in.nextInt();
+        Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  User Selection: " + zipcodeChoice);
         String valueOfZip = String.valueOf(zipcodeChoice);
         System.out.println(processor.getMarketValuePerCapita(valueOfZip));
 
