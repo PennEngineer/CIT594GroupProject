@@ -63,7 +63,6 @@ public class Processor {
 					}
 				}
 			}
-			System.out.println(ticketsHashMap);
 			return ticketsHashMap;
 		}
 

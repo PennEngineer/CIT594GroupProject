@@ -109,7 +109,7 @@ public class CommandLineUserInterface {
         double budget = in.nextDouble();
         TreeMap<String, Double> resultsMap = processor.safeMethod(budget);
         for (Map.Entry<String,Double> entry : resultsMap.entrySet()) {
-        	System.out.println("ZIP code: " + entry.getKey() + "\\tTicket Number Per Capita: "+ entry.getValue());
+        	System.out.println("ZIP code: " + entry.getKey() + "\tTicket Number Per Capita: "+ entry.getValue());
        }
         
       //re-prompt user
