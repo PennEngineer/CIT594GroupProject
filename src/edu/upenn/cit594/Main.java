@@ -2,9 +2,12 @@ package edu.upenn.cit594;
 
 
 import java.io.File;
+import edu.upenn.cit594.logging.*;
 import edu.upenn.cit594.datamanagement.CSVFileReader;
 import edu.upenn.cit594.datamanagement.CSVPropertyReader;
+import edu.upenn.cit594.datamanagement.JSONFileReader;
 import edu.upenn.cit594.datamanagement.PopulationFileReader;
+import edu.upenn.cit594.datamanagement.Reader;
 import edu.upenn.cit594.processor.Processor;
 
 public class Main {
@@ -35,10 +38,17 @@ public class Main {
 		    System.exit(0);  
 		}
 		
-		CSVFileReader reader = new CSVFileReader("properties.csv");
-		PopulationFileReader pop = new PopulationFileReader("population.txt");
-		CSVPropertyReader properties = new CSVPropertyReader("properties.csv");
-		Processor processor = new Processor(reader, pop.getPopulationObjects(), properties.getPropertyObjects());
+		Reader reader;
+		if(args[0].toLowerCase().equals("csv")) {
+			reader = new CSVFileReader(args[1]);
+		}
+		else {
+			reader = new JSONFileReader(args[1]);
+		}
+		CSVPropertyReader propertyReader = new CSVPropertyReader(args[2]);
+		PopulationFileReader populationReader = new PopulationFileReader(args[3]);
+		Logger.initializeName(args[4]);
+		Processor processor = new Processor(reader, populationReader.getPopulationObjects(), propertyReader.getPropertyObjects());
 		
 	}
 
