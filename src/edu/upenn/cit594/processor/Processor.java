@@ -51,11 +51,10 @@ public class Processor {
 		private HashMap<String, Integer> totalTicketsPerZipCode() {
 			HashMap<String, Integer> ticketsHashMap = new HashMap<>();
 			for (ParkingViolationObject p : this.parkingViolations) {
-				if(p.getZipcode() == null || p.getZipcode().length() == 0) {
+				if(p.getZipcode() == null) {
 					continue;
 				}
 				else {
-					System.out.println("THIS SHOULD NOT BE NULL " + p.getZipcode());
 					if(ticketsHashMap.containsKey(p.getZipcode())) {
 						int count = ticketsHashMap.get(p.getZipcode()) + 1;
 						ticketsHashMap.put(p.getZipcode(), count);
@@ -64,6 +63,7 @@ public class Processor {
 					}
 				}
 			}
+			System.out.println(ticketsHashMap);
 			return ticketsHashMap;
 		}
 
@@ -149,30 +149,29 @@ public class Processor {
 		HashMap<Integer, Double> popHashMap = populationInHashMapForm();
 		TreeMap<String, Double> safeZipCodeTreeMap = new TreeMap<>();
 		
+		//loop through all the zipcodes in the population file
 		for (Map.Entry<Integer, Double> entry : popHashMap.entrySet()) {
-			System.out.println("Zip Code: " + entry.getKey());
 		    String zipCode = Integer.toString(entry.getKey());
-		    System.out.println("Pop " + entry.getValue());
 			Double popForZipCode = entry.getValue();
+			
+			//check to see if that zipcode has a ticket number in the ticketsHashmap
 			int ticketNumber;
-			if(ticketsHashMap.get(zipCode) == null) {
+			//if there was no ticket for that zipcode, set the ticket number to 0
+			if(!ticketsHashMap.containsKey(zipCode)) {
 				ticketNumber = 0;
 			}
 			else {
 				ticketNumber = ticketsHashMap.get(zipCode);
 			}
 			int marketValue = getAverage(new MarketValueComparator(), Integer.parseInt(zipCode));
-			System.out.println("market value : " + marketValue);
 			Double ticketPerCapita = ticketNumber / popForZipCode;
 			if(marketValue > budget) {
 				continue;
 			}else {
-				System.out.println(zipCode + " " + ticketPerCapita + " " + marketValue);
 				safeZipCodeTreeMap.put(zipCode, ticketPerCapita);
 			}
 		}
 		return safeZipCodeTreeMap;
-		
 	}
 
 
