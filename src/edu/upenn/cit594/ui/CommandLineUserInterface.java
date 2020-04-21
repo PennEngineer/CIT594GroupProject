@@ -4,7 +4,9 @@ import edu.upenn.cit594.processor.MarketValueComparator;
 import edu.upenn.cit594.processor.Processor;
 import edu.upenn.cit594.processor.TotalLivableAreaComparator;
 
+import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -103,7 +105,15 @@ public class CommandLineUserInterface {
 
     //choice 6
     protected void doCustom() {
-
+    	System.out.println("Please enter your budget to find the list ZIP codes with their ticket number per capita within your budget.");
+        double budget = in.nextDouble();
+        TreeMap<String, Double> resultsMap = processor.safeMethod(budget);
+        for (Map.Entry<String,Double> entry : resultsMap.entrySet()) {
+        	System.out.println("ZIP code: " + entry.getKey() + "\\tTicket Number Per Capita: "+ entry.getValue());
+       }
+        
+      //re-prompt user
+        start();
     }
 
 
