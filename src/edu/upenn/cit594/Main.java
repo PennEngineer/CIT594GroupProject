@@ -1,6 +1,4 @@
 package edu.upenn.cit594;
-
-
 import java.io.File;
 import edu.upenn.cit594.logging.*;
 import edu.upenn.cit594.datamanagement.CSVFileReader;
