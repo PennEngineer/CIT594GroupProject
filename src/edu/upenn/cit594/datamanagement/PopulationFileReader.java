@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import edu.upenn.cit594.data.PopulationObject;
+import edu.upenn.cit594.logging.Logger;
 
 public class PopulationFileReader {
 	
@@ -20,6 +21,7 @@ public class PopulationFileReader {
 		File inFile = new File(inputFile);
 		try {
 			Scanner in = new Scanner(inFile,"UTF-8");
+			Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  File: " + inputFile);
 			while(in.hasNextLine()) {
 				String temp = in.nextLine();
 				try {

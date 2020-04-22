@@ -7,6 +7,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import edu.upenn.cit594.data.*;
+import edu.upenn.cit594.logging.Logger;
 
 public class JSONFileReader implements Reader {
 	
@@ -23,6 +24,7 @@ public class JSONFileReader implements Reader {
 		
 		try {
 			FileReader r = new FileReader(inputFile);
+			Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  File: " + inputFile);
 			Object obj = parser.parse(r);
 			JSONArray violationJson = (JSONArray) obj;
 			for (int i = 0; i < violationJson.size(); i++) {
