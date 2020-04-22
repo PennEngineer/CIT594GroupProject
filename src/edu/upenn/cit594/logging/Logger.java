@@ -2,6 +2,8 @@ package edu.upenn.cit594.logging;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
@@ -11,16 +13,19 @@ public class Logger {
 
     private static Logger instance;
     private PrintWriter out;
+    private FileWriter fileWriter;
 
     //1. Private constructor
     private Logger(String fileName) {
 
-        try {
-            out = new PrintWriter(new File(fileName));
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+    	try {
+			fileWriter = new FileWriter(new File(fileName), true);
+			out = new PrintWriter(fileWriter);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        
     }
 
     /**
