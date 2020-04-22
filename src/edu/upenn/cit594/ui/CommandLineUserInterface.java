@@ -28,7 +28,7 @@ public class CommandLineUserInterface {
         System.out.println("To show the average market value for residencies in a specified ZIP code, enter 3.");
         System.out.println("To show the average total livable area for residencies in a specified ZIP code, enter 4.");
         System.out.println("To show the total residential market value per capita for a specified ZIP code, enter 5.");
-        System.out.println("To show a list of ticket number per capita for ZIP codes within your budget, enter 6.");
+        System.out.println("To show a list of tickets per capita for ZIP codes within your budget, enter 6.");
         int choice = in.nextInt();
         Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  User Selection: " + choice);
         
