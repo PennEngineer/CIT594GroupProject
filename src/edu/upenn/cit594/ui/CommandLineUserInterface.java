@@ -77,7 +77,7 @@ public class CommandLineUserInterface {
         System.out.println("Please enter a ZIP code.");
         //if user enters an incorrect zip code, or a zip code not valid in the input files, display 0.
         int zipcodeChoice = in.nextInt();
-        Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  User Selection: " + zipcodeChoice);
+        Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  ZIP code: " + zipcodeChoice);
         System.out.println(processor.getAverage(new MarketValueComparator(), zipcodeChoice));
 
         //re-prompt user
@@ -89,7 +89,7 @@ public class CommandLineUserInterface {
         System.out.println("Please enter a ZIP code.");
         //if user enters an incorrect zip code, or a zip code not valid in the input files, display 0.
         int zipcodeChoice = in.nextInt();
-        Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  User Selection: " + zipcodeChoice);
+        Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  ZIP code: " + zipcodeChoice);
         System.out.println(processor.getAverage(new TotalLivableAreaComparator(), zipcodeChoice));
 
         //re-prompt user
@@ -101,7 +101,7 @@ public class CommandLineUserInterface {
         System.out.println("Please enter a ZIP code.");
         //if user enters an incorrect zip code, or a zip code not valid in the input files, display 0.
         int zipcodeChoice = in.nextInt();
-        Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  User Selection: " + zipcodeChoice);
+        Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  ZIP code: " + zipcodeChoice);
         String valueOfZip = String.valueOf(zipcodeChoice);
         System.out.println(processor.getMarketValuePerCapita(valueOfZip));
 
@@ -115,7 +115,7 @@ public class CommandLineUserInterface {
         double budget = in.nextDouble();
         TreeMap<String, Double> resultsMap = processor.safeMethod(budget);
         for (Map.Entry<String,Double> entry : resultsMap.entrySet()) {
-        	System.out.println("ZIP code: " + entry.getKey() + "    Ticket Number Per Capita: "+ entry.getValue());
+        	System.out.println("ZIP code: " + entry.getKey() + "    Ticket Number Per Capita: " + entry.getValue());
        }
         
       //re-prompt user
