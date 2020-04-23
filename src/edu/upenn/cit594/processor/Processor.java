@@ -141,12 +141,12 @@ public class Processor {
 	}
 	
 	//6 Display the zip code with the lowest ticket number per capita within the user budget
-	public TreeMap<String, Double> safeMethod(double budget) {
+	public HashMap<String, Double> safeMethod(double budget) {
 		
 		//get number of tickets per zipcode
 		HashMap<String, Integer> ticketsHashMap = totalTicketsPerZipCode();
 		HashMap<Integer, Double> popHashMap = populationInHashMapForm();
-		TreeMap<String, Double> safeZipCodeTreeMap = new TreeMap<>();
+		HashMap<String, Double> safeZipCodeTreeMap = new HashMap<>();
 		
 		//loop through all the zipcodes in the population file
 		for (Map.Entry<Integer, Double> entry : popHashMap.entrySet()) {

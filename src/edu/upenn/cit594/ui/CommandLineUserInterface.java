@@ -5,6 +5,7 @@ import edu.upenn.cit594.processor.MarketValueComparator;
 import edu.upenn.cit594.processor.Processor;
 import edu.upenn.cit594.processor.TotalLivableAreaComparator;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
@@ -113,7 +114,7 @@ public class CommandLineUserInterface {
     protected void doCustom() {
     	System.out.println("Please enter your budget to find the list ZIP codes with their ticket number per capita within your budget.");
         double budget = in.nextDouble();
-        TreeMap<String, Double> resultsMap = processor.safeMethod(budget);
+        HashMap<String, Double> resultsMap = processor.safeMethod(budget);
         for (Map.Entry<String,Double> entry : resultsMap.entrySet()) {
         	System.out.println("ZIP code: " + entry.getKey() + "    Ticket Number Per Capita: " + entry.getValue());
        }
