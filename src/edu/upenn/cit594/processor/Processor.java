@@ -104,16 +104,24 @@ public class Processor {
 	//step 2 -- calculate total fine per capita
 	//use of tree map to sort key of zipcodes
 	public TreeMap<Integer, String> totalFinePerCapita() {
-		TreeMap<Integer, String> sortedTotalFinesPerCapitaByZipCode = new TreeMap<>();
-		for (Integer zipCode : totalAggregateFineByZipCode().keySet()) {
-			if (populationInHashMapForm().containsKey(zipCode)) {
-				double zipCodePopulation = populationInHashMapForm().get(zipCode);
-				double fineInZipCode = totalAggregateFineByZipCode().get(zipCode);
-				double zipCodeFinePerCapita = fineInZipCode/zipCodePopulation;
-				sortedTotalFinesPerCapitaByZipCode.put(zipCode, truncate(zipCodeFinePerCapita, 4));
-			}
+		
+		Map<String, TreeMap<Integer,String>> results = new HashMap<>();
+		if(results.containsKey("answer")) {
+			return results.get("answer");
 		}
-		return sortedTotalFinesPerCapitaByZipCode;
+			else {
+			TreeMap<Integer, String> sortedTotalFinesPerCapitaByZipCode = new TreeMap<>();
+			for (Integer zipCode : totalAggregateFineByZipCode().keySet()) {
+				if (populationInHashMapForm().containsKey(zipCode)) {
+					double zipCodePopulation = populationInHashMapForm().get(zipCode);
+					double fineInZipCode = totalAggregateFineByZipCode().get(zipCode);
+					double zipCodeFinePerCapita = fineInZipCode/zipCodePopulation;
+					sortedTotalFinesPerCapitaByZipCode.put(zipCode, truncate(zipCodeFinePerCapita, 4));
+				}
+			}
+			results.put("answer", sortedTotalFinesPerCapitaByZipCode);
+			return sortedTotalFinesPerCapitaByZipCode;
+		}
 	}
 	
 	//step 3 & 4 -- calculate average market value or total livable area by number of residences
