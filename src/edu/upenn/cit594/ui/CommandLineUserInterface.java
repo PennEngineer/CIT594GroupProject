@@ -93,9 +93,13 @@ public class CommandLineUserInterface {
     protected void doAverageTotalLivableArea() {
         System.out.println("Please enter a ZIP code.");
         //if user enters an incorrect zip code, or a zip code not valid in the input files, display 0.
-        int zipcodeChoice = in.nextInt();
+        String zipcodeChoice = in.next();
+        if (!zipcodeChoice.matches("^[0-9]{5}$")) {
+            System.out.println(0);
+            start();
+        }
         Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  ZIP code: " + zipcodeChoice);
-        System.out.println(processor.getAverage(new TotalLivableAreaComparator(), zipcodeChoice));
+        System.out.println(processor.getAverage(new TotalLivableAreaComparator(), Integer.parseInt(zipcodeChoice)));
 
         //re-prompt user
         start();
