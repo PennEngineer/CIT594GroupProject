@@ -169,34 +169,42 @@ public class Processor {
 	//6 Display the zip code with the lowest ticket number per capita within the user budget
 	public HashMap<String, Double> safeMethod(double budget) {
 		
-		//get number of tickets per zipcode
-		HashMap<String, Integer> ticketsHashMap = totalTicketsPerZipCode();
-		HashMap<Integer, Double> popHashMap = populationInHashMapForm();
-		HashMap<String, Double> safeZipCodeTreeMap = new HashMap<>();
-		
-		//loop through all the zipcodes in the population file
-		for (Map.Entry<Integer, Double> entry : popHashMap.entrySet()) {
-		    String zipCode = Integer.toString(entry.getKey());
-			Double popForZipCode = entry.getValue();
-			
-			//check to see if that zipcode has a ticket number in the ticketsHashmap
-			int ticketNumber;
-			//if there was no ticket for that zipcode, set the ticket number to 0
-			if(!ticketsHashMap.containsKey(zipCode)) {
-				ticketNumber = 0;
-			}
-			else {
-				ticketNumber = ticketsHashMap.get(zipCode);
-			}
-			int marketValue = getAverage(new MarketValueComparator(), Integer.parseInt(zipCode));
-			Double ticketPerCapita = ticketNumber / popForZipCode;
-			if(marketValue > budget) {
-				continue;
-			}else {
-				safeZipCodeTreeMap.put(zipCode, ticketPerCapita);
-			}
+		Map<Double, HashMap<String, Double>> results = new HashMap<>();
+		if(results.containsKey(budget)) {
+			return results.get(budget);
 		}
-		return safeZipCodeTreeMap;
+		else {
+
+			//get number of tickets per zipcode
+			HashMap<String, Integer> ticketsHashMap = totalTicketsPerZipCode();
+			HashMap<Integer, Double> popHashMap = populationInHashMapForm();
+			HashMap<String, Double> safeZipCodeTreeMap = new HashMap<>();
+			
+			//loop through all the zipcodes in the population file
+			for (Map.Entry<Integer, Double> entry : popHashMap.entrySet()) {
+			    String zipCode = Integer.toString(entry.getKey());
+				Double popForZipCode = entry.getValue();
+				
+				//check to see if that zipcode has a ticket number in the ticketsHashmap
+				int ticketNumber;
+				//if there was no ticket for that zipcode, set the ticket number to 0
+				if(!ticketsHashMap.containsKey(zipCode)) {
+					ticketNumber = 0;
+				}
+				else {
+					ticketNumber = ticketsHashMap.get(zipCode);
+				}
+				int marketValue = getAverage(new MarketValueComparator(), Integer.parseInt(zipCode));
+				Double ticketPerCapita = ticketNumber / popForZipCode;
+				if(marketValue > budget) {
+					continue;
+				}else {
+					safeZipCodeTreeMap.put(zipCode, ticketPerCapita);
+				}
+			}
+			results.put(budget, safeZipCodeTreeMap);
+			return safeZipCodeTreeMap;
+		}
 	}
 
 
