@@ -30,25 +30,25 @@ public class CommandLineUserInterface {
         System.out.println("To show the average total livable area for residencies in a specified ZIP code, enter 4.");
         System.out.println("To show the total residential market value per capita for a specified ZIP code, enter 5.");
         System.out.println("To show a list of tickets per capita for ZIP codes within your budget, enter 6.");
-        int choice = in.nextInt();
+        String choice = in.next();
         Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  User Selection: " + choice);
         
-        if (choice == 0) {
+        if (choice.equals("0")) {
             System.exit(1);
-        } else if (choice == 1) {
+        } else if (choice.equals("1")) {
             doTotalPopulationForAllZipCodes();
-        } else if (choice == 2) {
+        } else if (choice.equals("2")) {
             doParkingFinesPerCapitaForAllZipCodes();
-        } else if (choice == 3) {
+        } else if (choice.equals("3")) {
             doAverageResidentialMarketValue();
-        } else if (choice == 4) {
+        } else if (choice.equals("4")) {
             doAverageTotalLivableArea();
-        } else if (choice == 5) {
+        } else if (choice.equals("5")) {
             doTotalResidentialMarketValuePerCapita();
-        } else if (choice == 6) {
+        } else if (choice == "6") {
             doCustom();
         } else {
-            System.err.println("Please enter a number between 0 and 6.");
+            System.err.println("Input Error. Please enter a number between 0 and 6.");
             System.exit(1);
         }
     }
@@ -77,9 +77,13 @@ public class CommandLineUserInterface {
     protected void doAverageResidentialMarketValue() {
         System.out.println("Please enter a ZIP code.");
         //if user enters an incorrect zip code, or a zip code not valid in the input files, display 0.
-        int zipcodeChoice = in.nextInt();
+        String zipcodeChoice = in.next();
+        if (!zipcodeChoice.matches("^[0-9]{5}$")) {
+            System.out.println(0);
+            start();
+        }
         Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  ZIP code: " + zipcodeChoice);
-        System.out.println(processor.getAverage(new MarketValueComparator(), zipcodeChoice));
+        System.out.println(processor.getAverage(new MarketValueComparator(), Integer.parseInt(zipcodeChoice)));
 
         //re-prompt user
         start();
