@@ -112,7 +112,7 @@ public class CommandLineUserInterface {
 
     //choice 6
     protected void doCustom() {
-    	System.out.println("Please enter your budget to find the list ZIP codes with their ticket number per capita within your budget.");
+    	System.out.println("Please enter your preferred market value budget to find the list ZIP codes with their ticket number per capita within your budget.");
         double budget = in.nextDouble();
         HashMap<String, Double> resultsMap = processor.safeMethod(budget);
         for (Map.Entry<String,Double> entry : resultsMap.entrySet()) {
