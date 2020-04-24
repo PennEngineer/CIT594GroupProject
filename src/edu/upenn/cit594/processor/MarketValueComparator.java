@@ -1,25 +1,41 @@
 package edu.upenn.cit594.processor;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import edu.upenn.cit594.data.Property;
 
 public class MarketValueComparator implements AverageComparator {
 
+	private Map<Integer, Double> results = new HashMap<>();
+	
 	@Override
 	public double getAverage(ArrayList<Property> properties, int zipCode) {
-		int residentials = 0;
-		double total = 0;
-		for(Property propertyObject : properties) {
-			if(propertyObject.getZipCode().contains(Integer.toString(zipCode))) {
-				if(propertyObject.getMarketValue() == null || propertyObject.getMarketValue().equals("") || propertyObject.getMarketValue().isEmpty()) {
-					continue;
-				}else {
-					total += Double.parseDouble(propertyObject.getMarketValue());
-					residentials++;
+		
+		if(results.containsKey(zipCode)) {
+			return results.get(zipCode);
+		}
+		
+		else {
+			int residentials = 0;
+			double total = 0;
+			for(Property propertyObject : properties) {
+				if(propertyObject.getZipCode().contains(Integer.toString(zipCode))) {
+					if(propertyObject.getMarketValue() == null || propertyObject.getMarketValue().equals("") || propertyObject.getMarketValue().isEmpty()) {
+						continue;
+					}else {
+						total += Double.parseDouble(propertyObject.getMarketValue());
+						residentials++;
+					}
 				}
 			}
+			if(total == 0) {
+				results.put(zipCode, 0.0);
+				return 0;
+			}
+			
+			results.put(zipCode, total/residentials);
+			return total/residentials;
 		}
-		if(total == 0) return 0;
-		return total/residentials;
 	}
 }
