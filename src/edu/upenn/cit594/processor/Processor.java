@@ -31,11 +31,20 @@ public class Processor {
 
 	//step 1 - calculate total population of all zipcodes
 	public int calculatePopulation() {
-		int total = 0;
-		for(PopulationObject p : this.populations) {
-			total += Integer.parseInt(p.getPopulationString());
+		
+		Map<String, Integer> results = new HashMap<>();
+		
+		if(results.containsKey("total")) {
+			return results.get("total");
 		}
-		return total;
+		else {
+			int total = 0;
+			for(PopulationObject p : this.populations) {
+				total += Integer.parseInt(p.getPopulationString());
+			}
+			results.put("total", total);
+			return total;
+		}
 	}
 
 	//helper method to maintain population format in hashmap form for faster processing
