@@ -30,7 +30,7 @@ public class CommandLineUserInterface {
         System.out.println("To show the average market value for residencies in a specified ZIP code, enter 3.");
         System.out.println("To show the average total livable area for residencies in a specified ZIP code, enter 4.");
         System.out.println("To show the total residential market value per capita for a specified ZIP code, enter 5.");
-        System.out.println("To show a list of tickets per capita for ZIP codes within your budget, enter 6.");
+        System.out.println("To show a list of average tickets per capita for ZIP codes within your budget, enter 6.");
         String choice = in.next();
         Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  User Selection: " + choice);
         
@@ -124,7 +124,7 @@ public class CommandLineUserInterface {
 
     //choice 6
     protected void doCustom() {
-    	System.out.println("Please enter your preferred market value budget to find the list ZIP codes with their average ticket # per capita within your budget.");
+    	System.out.println("Please enter your preferred market value budget.");
         String budget = in.next();
         if(!isNumeric(budget)) {
         	System.out.println("Please try again with numbers only.");
