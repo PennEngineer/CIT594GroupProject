@@ -42,7 +42,10 @@ public class CSVPropertyReader {
             while ((line = br.readLine()) != null) {
                 String[] fields = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)", -1);
                 String zipCodeValue = fields[zipCode];
-                if (zipCodeValue != null && zipCodeValue.length() >= 5) {
+                String marketVal = fields[marketValue];
+                String totalLivableValue = fields[totalLivableArea];
+                if (zipCodeValue != null && zipCodeValue.length() >= 5 && marketVal != null && totalLivableValue != null
+                && !marketVal.isEmpty() && !totalLivableValue.isEmpty()) {
                     Property p = new Property(fields[marketValue], fields[totalLivableArea], zipCodeValue.substring(0,5));
                     properties.add(p);
                 }

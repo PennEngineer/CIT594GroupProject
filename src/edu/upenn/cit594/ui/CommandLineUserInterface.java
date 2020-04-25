@@ -45,7 +45,7 @@ public class CommandLineUserInterface {
             doAverageTotalLivableArea();
         } else if (choice.equals("5")) {
             doTotalResidentialMarketValuePerCapita();
-        } else if (choice == "6") {
+        } else if (choice.equals("6")) {
             doCustom();
         } else {
             System.err.println("Input Error. Please enter a number between 0 and 6.");
@@ -109,10 +109,13 @@ public class CommandLineUserInterface {
     protected void doTotalResidentialMarketValuePerCapita() {
         System.out.println("Please enter a ZIP code.");
         //if user enters an incorrect zip code, or a zip code not valid in the input files, display 0.
-        int zipcodeChoice = in.nextInt();
+        String zipcodeChoice = in.next();
+        if (!zipcodeChoice.matches("^[0-9]{5}$")) {
+            System.out.println(0);
+            start();
+        }
         Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  ZIP code: " + zipcodeChoice);
-        String valueOfZip = String.valueOf(zipcodeChoice);
-        System.out.println(processor.getMarketValuePerCapita(valueOfZip));
+        System.out.println(processor.getMarketValuePerCapita(zipcodeChoice));
 
         //re-prompt user
         start();

@@ -132,7 +132,7 @@ public class Processor {
 	
 	//step 5 - total residential value per capita
 	public int getMarketValuePerCapita(String zipCode) {
-		
+
 		Map<String, Integer> results = new HashMap<>();
 		if(results.containsKey(zipCode)) {
 			return results.get(zipCode);
@@ -151,16 +151,13 @@ public class Processor {
 			}
 			int zipCodeValue = Integer.parseInt(zipCode);
 			double populationOfZipCode = populationInHashMapForm().get(zipCodeValue);
-			System.out.println("Population of zipcode: " + populationOfZipCode);
 			for (Property p : this.properties) {
 				//if zipcode value matches, add to totalMarketValue
 				if (p.getZipCode().equals(zipCode)) {
-					System.out.println(zipCode);
 					totalMarketValue += Double.parseDouble(p.getMarketValue());
 				}
 			}
-			System.out.println("Total market value: "  + totalMarketValue);
-			
+
 			results.put(zipCode, Integer.parseInt(truncate(totalMarketValue/populationOfZipCode, 0)));
 			return Integer.parseInt(truncate(totalMarketValue/populationOfZipCode, 0));
 		}
