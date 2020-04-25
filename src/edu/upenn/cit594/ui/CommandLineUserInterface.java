@@ -5,6 +5,7 @@ import edu.upenn.cit594.processor.MarketValueComparator;
 import edu.upenn.cit594.processor.Processor;
 import edu.upenn.cit594.processor.TotalLivableAreaComparator;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -123,17 +124,35 @@ public class CommandLineUserInterface {
 
     //choice 6
     protected void doCustom() {
-    	System.out.println("Please enter your preferred market value budget to find the list ZIP codes with their ticket number per capita within your budget.");
-        double budget = in.nextDouble();
-        HashMap<String, Double> resultsMap = processor.safeMethod(budget);
+    	System.out.println("Please enter your preferred market value budget to find the list ZIP codes with their average ticket number per capita within your budget.");
+        String budget = in.next();
+        if(!isNumeric(budget)) {
+        	System.out.println("Please try again with numbers only.");
+        }else {
+        HashMap<String, Double> resultsMap = processor.safeMethod(Double.parseDouble(budget));
         if(resultsMap.size() == 0) System.out.println("There was no ZIP codes within your budget. Please try again with a higher amount");
         else {
-	        for (Map.Entry<String,Double> entry : resultsMap.entrySet()) {
-	        	System.out.println("ZIP code: " + entry.getKey() + "    Ticket Number Per Capita: " + entry.getValue());
-	       }
+        		System.out.println("ZIP codes with their average ticket # per capita within your budget\n\n");
+		        for (Map.Entry<String,Double> entry : resultsMap.entrySet()) {
+		        	DecimalFormat df = new DecimalFormat("#.00000");
+		        	System.out.println("ZIP code: " + entry.getKey() + "   Average Ticket # Per Capita: " + df.format(entry.getValue()));
+		       }
+        	}
         }
       //re-prompt user
         start();
+    }
+    
+    //helper method to check if the number is a number
+    private boolean isNumeric(String input) {
+        boolean isNumeric = true;
+        try {
+            Double.parseDouble(input);
+
+        }catch (NumberFormatException e) {
+            isNumeric = false;
+        }
+        return isNumeric;
     }
 
 
