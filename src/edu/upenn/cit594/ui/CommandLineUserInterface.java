@@ -130,7 +130,7 @@ public class CommandLineUserInterface {
         	System.out.println("Please try again with numbers only.");
         }else {
         HashMap<String, Double> resultsMap = processor.safeMethod(Double.parseDouble(budget));
-        if(resultsMap.size() == 0) System.out.println("There was no ZIP codes within your budget. Please try again with a higher amount");
+        if(resultsMap.size() == 0) System.out.println("There were no ZIP codes within your budget. Please try again with a higher amount");
         else {
         		System.out.println("ZIP codes with their average ticket # per capita within your budget: " +"$"+budget+"\n");
 		        for (Map.Entry<String,Double> entry : resultsMap.entrySet()) {
