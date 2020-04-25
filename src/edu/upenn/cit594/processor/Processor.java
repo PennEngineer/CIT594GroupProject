@@ -2,18 +2,11 @@ package edu.upenn.cit594.processor;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 import edu.upenn.cit594.data.ParkingViolationObject;
 import edu.upenn.cit594.data.PopulationObject;
 import edu.upenn.cit594.data.Property;
-import edu.upenn.cit594.datamanagement.CSVPropertyReader;
-import edu.upenn.cit594.datamanagement.JSONFileReader;
-import edu.upenn.cit594.datamanagement.PopulationFileReader;
 import edu.upenn.cit594.datamanagement.Reader;
 
 public class Processor {
@@ -131,12 +124,38 @@ public class Processor {
 			return sortedTotalFinesPerCapitaByZipCode;
 		}
 	}
-	
-	//step 3 & 4 -- calculate average market value or total livable area by number of residences
-	public int getAverage(AverageComparator comparator, int zipcode) {
-		
-		return Integer.parseInt(truncate(comparator.getAverage(properties, zipcode),0));
+
+
+	//step 3
+	public int getAverageMarketValue(int zipCode) {
+		return Integer.parseInt(truncate(getAverage(zipCode, new MarketValue()), 0));
 	}
+
+	//step 4
+	public int getAverageTotalLivableArea(int zipCode) {
+		return Integer.parseInt(truncate(getAverage(zipCode, new TotalLivableAreaValue()), 0));
+	}
+
+	private double getAverage(int zipCode, Value val) {
+		int numOfResidencies = 0;
+		double total = 0;
+		for (Property p : this.properties) {
+			if (val.value(p) != null && !val.value(p).isEmpty()
+					&& p.getZipCode().equals(String.valueOf(zipCode)))  {
+				total += Double.parseDouble(val.value(p));
+				numOfResidencies++;
+			}
+		}
+		double average = total/numOfResidencies;
+		return average;
+	}
+
+//
+//	//step 3 & 4 -- calculate average market value or total livable area by number of residences
+//	public int getAverage(AverageComparator comparator, int zipcode) {
+//
+//		return Integer.parseInt(truncate(comparator.getAverage(properties, zipcode),0));
+//	}
 	
 	//step 5 - total residential value per capita
 	public int getMarketValuePerCapita(String zipCode) {
@@ -199,7 +218,7 @@ public class Processor {
 				else {
 					ticketNumber = ticketsHashMap.get(zipCode);
 				}
-				int marketValue = getAverage(new MarketValueComparator(), Integer.parseInt(zipCode));
+				int marketValue = getAverageMarketValue(Integer.parseInt(zipCode));
 				Double ticketPerCapita = ticketNumber / popForZipCode;
 				if (marketValue > budget) {
 					continue;

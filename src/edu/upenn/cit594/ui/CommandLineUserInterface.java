@@ -1,17 +1,14 @@
 package edu.upenn.cit594.ui;
 
 import edu.upenn.cit594.logging.Logger;
-import edu.upenn.cit594.processor.MarketValueComparator;
+import edu.upenn.cit594.processor.MarketValue;
 import edu.upenn.cit594.processor.Processor;
-import edu.upenn.cit594.processor.TotalLivableAreaComparator;
+import edu.upenn.cit594.processor.TotalLivableAreaValue;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class CommandLineUserInterface {
 
@@ -84,7 +81,7 @@ public class CommandLineUserInterface {
             start();
         }
         Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  ZIP code: " + zipcodeChoice);
-        System.out.println(processor.getAverage(new MarketValueComparator(), Integer.parseInt(zipcodeChoice)));
+        System.out.println(processor.getAverageMarketValue(Integer.parseInt(zipcodeChoice)));
 
         //re-prompt user
         start();
@@ -100,7 +97,7 @@ public class CommandLineUserInterface {
             start();
         }
         Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  ZIP code: " + zipcodeChoice);
-        System.out.println(processor.getAverage(new TotalLivableAreaComparator(), Integer.parseInt(zipcodeChoice)));
+        System.out.println(processor.getAverageTotalLivableArea(Integer.parseInt(zipcodeChoice)));
 
         //re-prompt user
         start();
