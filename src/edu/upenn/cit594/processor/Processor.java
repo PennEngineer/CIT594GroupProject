@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -39,8 +40,14 @@ public class Processor {
 		}
 		else {
 			int total = 0;
+			HashSet<String> zipcodeSet = new HashSet<>();
 			for(PopulationObject p : this.populations) {
-				total += Integer.parseInt(p.getPopulationString());
+				if(zipcodeSet.contains(p.getZipCode())) {
+					continue;
+				}
+				else {
+					total += Integer.parseInt(p.getPopulationString());
+				}
 			}
 			results.put("total", total);
 			return total;
