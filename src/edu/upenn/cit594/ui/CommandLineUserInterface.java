@@ -126,10 +126,12 @@ public class CommandLineUserInterface {
     	System.out.println("Please enter your preferred market value budget to find the list ZIP codes with their ticket number per capita within your budget.");
         double budget = in.nextDouble();
         HashMap<String, Double> resultsMap = processor.safeMethod(budget);
-        for (Map.Entry<String,Double> entry : resultsMap.entrySet()) {
-        	System.out.println("ZIP code: " + entry.getKey() + "    Ticket Number Per Capita: " + entry.getValue());
-       }
-        
+        if(resultsMap.size() == 0) System.out.println("There was no ZIP codes within your budget. Please try again with a higher amount");
+        else {
+	        for (Map.Entry<String,Double> entry : resultsMap.entrySet()) {
+	        	System.out.println("ZIP code: " + entry.getKey() + "    Ticket Number Per Capita: " + entry.getValue());
+	       }
+        }
       //re-prompt user
         start();
     }
