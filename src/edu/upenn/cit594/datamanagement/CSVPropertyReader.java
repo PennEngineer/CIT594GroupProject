@@ -34,7 +34,7 @@ public class CSVPropertyReader {
             File f = new File(inputFile);
             FileReader fr = new FileReader(f);
             BufferedReader br = new BufferedReader(fr);
-            Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  File: " + inputFile);
+            Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + " " + inputFile);
 
             String[] firstRow = br.readLine().split(",");
             int marketValue = 0;

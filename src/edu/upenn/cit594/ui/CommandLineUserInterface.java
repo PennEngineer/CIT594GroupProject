@@ -76,11 +76,11 @@ public class CommandLineUserInterface {
         System.out.println("Please enter a ZIP code.");
         //if user enters an incorrect zip code, or a zip code not valid in the input files, display 0.
         String zipcodeChoice = in.next();
+        Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  ZIP code: " + zipcodeChoice);
         if (!zipcodeChoice.matches("^[0-9]{5}$")) {
             System.out.println(0);
             start();
         }
-        Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  ZIP code: " + zipcodeChoice);
         System.out.println(processor.getAverageMarketValue(Integer.parseInt(zipcodeChoice)));
 
         //re-prompt user
@@ -92,11 +92,11 @@ public class CommandLineUserInterface {
         System.out.println("Please enter a ZIP code.");
         //if user enters an incorrect zip code, or a zip code not valid in the input files, display 0.
         String zipcodeChoice = in.next();
+        Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  ZIP code: " + zipcodeChoice);
         if (!zipcodeChoice.matches("^[0-9]{5}$")) {
             System.out.println(0);
             start();
         }
-        Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  ZIP code: " + zipcodeChoice);
         System.out.println(processor.getAverageTotalLivableArea(Integer.parseInt(zipcodeChoice)));
 
         //re-prompt user
@@ -108,11 +108,11 @@ public class CommandLineUserInterface {
         System.out.println("Please enter a ZIP code.");
         //if user enters an incorrect zip code, or a zip code not valid in the input files, display 0.
         String zipcodeChoice = in.next();
+        Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  ZIP code: " + zipcodeChoice);
         if (!zipcodeChoice.matches("^[0-9]{5}$")) {
             System.out.println(0);
             start();
         }
-        Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  ZIP code: " + zipcodeChoice);
         System.out.println(processor.getMarketValuePerCapita(zipcodeChoice));
 
         //re-prompt user

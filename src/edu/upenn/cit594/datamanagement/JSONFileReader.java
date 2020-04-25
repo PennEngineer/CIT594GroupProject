@@ -36,7 +36,7 @@ public class JSONFileReader implements Reader {
 		
 		try {
 			FileReader r = new FileReader(inputFile);
-			Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  File: " + inputFile);
+			Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + " " + inputFile);
 			Object obj = parser.parse(r);
 			JSONArray violationJson = (JSONArray) obj;
 			for (int i = 0; i < violationJson.size(); i++) {
