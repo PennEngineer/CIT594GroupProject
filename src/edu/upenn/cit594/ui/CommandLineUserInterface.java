@@ -124,7 +124,7 @@ public class CommandLineUserInterface {
 
     //choice 6
     protected void doCustom() {
-    	System.out.println("Please enter your preferred market value budget to find the list ZIP codes with their average ticket number per capita within your budget.");
+    	System.out.println("Please enter your preferred market value budget to find the list ZIP codes with their average ticket # per capita within your budget.");
         String budget = in.next();
         if(!isNumeric(budget)) {
         	System.out.println("Please try again with numbers only.");
@@ -132,7 +132,7 @@ public class CommandLineUserInterface {
         HashMap<String, Double> resultsMap = processor.safeMethod(Double.parseDouble(budget));
         if(resultsMap.size() == 0) System.out.println("There was no ZIP codes within your budget. Please try again with a higher amount");
         else {
-        		System.out.println("ZIP codes with their average ticket # per capita within your budget\n\n");
+        		System.out.println("ZIP codes with their average ticket # per capita within your budget: " +"$"+budget+"\n");
 		        for (Map.Entry<String,Double> entry : resultsMap.entrySet()) {
 		        	DecimalFormat df = new DecimalFormat("#.00000");
 		        	System.out.println("ZIP code: " + entry.getKey() + "   Average Ticket # Per Capita: " + df.format(entry.getValue()));
