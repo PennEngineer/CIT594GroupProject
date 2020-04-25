@@ -46,6 +46,7 @@ public class Processor {
 					continue;
 				}
 				else {
+					zipcodeSet.add(p.getZipCode());
 					total += Integer.parseInt(p.getPopulationString());
 				}
 			}
