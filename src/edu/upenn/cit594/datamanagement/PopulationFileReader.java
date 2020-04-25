@@ -33,7 +33,7 @@ public class PopulationFileReader {
 		File inFile = new File(inputFile);
 		try {
 			Scanner in = new Scanner(inFile,"UTF-8");
-			Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  File: " + inputFile);
+			Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + " " + inputFile);
 			while(in.hasNextLine()) {
 				String temp = in.nextLine();
 				try {

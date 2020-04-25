@@ -29,7 +29,7 @@ public class CommandLineUserInterface {
         System.out.println("To show the total residential market value per capita for a specified ZIP code, enter 5.");
         System.out.println("To show a list of average tickets per capita for ZIP codes within your budget, enter 6.");
         String choice = in.next();
-        Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  User Selection: " + choice);
+        Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + " User Selection: " + choice);
         
         if (choice.equals("0")) {
             System.exit(1);
@@ -76,11 +76,11 @@ public class CommandLineUserInterface {
         System.out.println("Please enter a ZIP code.");
         //if user enters an incorrect zip code, or a zip code not valid in the input files, display 0.
         String zipcodeChoice = in.next();
+        Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + " ZIP code: " + zipcodeChoice);
         if (!zipcodeChoice.matches("^[0-9]{5}$")) {
             System.out.println(0);
             start();
         }
-        Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  ZIP code: " + zipcodeChoice);
         System.out.println(processor.getAverageMarketValue(Integer.parseInt(zipcodeChoice)));
 
         //re-prompt user
@@ -92,11 +92,11 @@ public class CommandLineUserInterface {
         System.out.println("Please enter a ZIP code.");
         //if user enters an incorrect zip code, or a zip code not valid in the input files, display 0.
         String zipcodeChoice = in.next();
+        Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + " ZIP code: " + zipcodeChoice);
         if (!zipcodeChoice.matches("^[0-9]{5}$")) {
             System.out.println(0);
             start();
         }
-        Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  ZIP code: " + zipcodeChoice);
         System.out.println(processor.getAverageTotalLivableArea(Integer.parseInt(zipcodeChoice)));
 
         //re-prompt user
@@ -108,11 +108,11 @@ public class CommandLineUserInterface {
         System.out.println("Please enter a ZIP code.");
         //if user enters an incorrect zip code, or a zip code not valid in the input files, display 0.
         String zipcodeChoice = in.next();
+        Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + " ZIP code: " + zipcodeChoice);
         if (!zipcodeChoice.matches("^[0-9]{5}$")) {
             System.out.println(0);
             start();
         }
-        Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + "  ZIP code: " + zipcodeChoice);
         System.out.println(processor.getMarketValuePerCapita(zipcodeChoice));
 
         //re-prompt user

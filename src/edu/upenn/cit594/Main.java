@@ -49,6 +49,7 @@ public class Main {
 		Logger.initializeName(args[4]);
 		Processor processor = new Processor(reader, populationReader.getPopulationObjects(), propertyReader.getPropertyObjects());
 		CommandLineUserInterface commandLineInterface = new CommandLineUserInterface(processor);
+		//Logging when the program starts
 		Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + " " + args[1] + " " + args[2] + " " + args[3]);
 		commandLineInterface.start();
 	}
