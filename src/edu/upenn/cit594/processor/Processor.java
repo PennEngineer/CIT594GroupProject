@@ -7,6 +7,9 @@ import java.util.*;
 import edu.upenn.cit594.data.ParkingViolationObject;
 import edu.upenn.cit594.data.PopulationObject;
 import edu.upenn.cit594.data.Property;
+import edu.upenn.cit594.datamanagement.CSVPropertyReader;
+import edu.upenn.cit594.datamanagement.JSONFileReader;
+import edu.upenn.cit594.datamanagement.PopulationFileReader;
 import edu.upenn.cit594.datamanagement.Reader;
 
 public class Processor {
@@ -15,6 +18,7 @@ public class Processor {
 	protected ArrayList<ParkingViolationObject> parkingViolations;
 	protected ArrayList<PopulationObject> populations;
 	protected ArrayList<Property> properties;
+	private static int populationResults = -1;
 	
 	public Processor(Reader reader, ArrayList<PopulationObject> pop, ArrayList<Property> properties) {
 		this.reader = reader;
@@ -26,15 +30,12 @@ public class Processor {
 	//step 1 - calculate total population of all zipcodes
 	public int calculatePopulation() {
 		
-		Map<String, Integer> results = new HashMap<>();
-		
-		if(results.containsKey("total")) {
-			return results.get("total");
-		}
-		else {
+		if (populationResults != -1) {
+			return populationResults;
+		} else {
 			int total = 0;
 			HashSet<String> zipcodeSet = new HashSet<>();
-			for (PopulationObject p : this.populations) {
+			for (PopulationObject p : populations) {
 				if(zipcodeSet.contains(p.getZipCode())) {
 					continue;
 				}
@@ -43,7 +44,7 @@ public class Processor {
 					total += Integer.parseInt(p.getPopulationString());
 				}
 			}
-			results.put("total", total);
+			populationResults = total;
 			return total;
 		}
 	}
@@ -230,5 +231,7 @@ public class Processor {
 			return safeZipCodeTreeMap;
 		}
 	}
+
+
 
 }
