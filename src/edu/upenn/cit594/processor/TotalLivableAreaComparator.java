@@ -23,7 +23,7 @@ public class TotalLivableAreaComparator implements AverageComparator {
 				if(propertyObject.getZipCode().contains(Integer.toString(zipCode))) {
 					if(propertyObject.getTotalLivableArea() == null || propertyObject.getTotalLivableArea().equals("") || propertyObject.getTotalLivableArea().isEmpty()) {
 						continue;
-					}else {
+					} else {
 						total += Double.parseDouble(propertyObject.getTotalLivableArea());
 						residentials++;
 					}
@@ -33,8 +33,9 @@ public class TotalLivableAreaComparator implements AverageComparator {
 				results.put(zipCode, 0.0);
 				return 0;
 			}
-			results.put(zipCode, total/residentials);
-			return total/residentials;
+			double val = total/residentials;
+			results.put(zipCode, val);
+			return val;
 		}
 	}
 }

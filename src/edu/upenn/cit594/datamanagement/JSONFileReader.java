@@ -9,14 +9,26 @@ import org.json.simple.parser.JSONParser;
 import edu.upenn.cit594.data.*;
 import edu.upenn.cit594.logging.Logger;
 
+/**
+ * This class is made to read the JSON version of the Parking violations file.
+ */
 public class JSONFileReader implements Reader {
 	
 	protected String inputFile;
-	
+
+	/**
+	 * Constructor for the JSONFileReader
+	 * @param inputFile - the name of the input file to be read
+	 */
 	public JSONFileReader(String inputFile) {
 		this.inputFile = inputFile;
 	}
 
+	/**
+	 * This method reads and sanitizes the data for the JSON version of the Parking Violations file and
+	 * stores each row as a Parking violation object in an array list.
+	 * @return - an array list of parking violation objects
+	 */
 	public ArrayList<ParkingViolationObject> getParkingViolationObjects() {
 		ArrayList<ParkingViolationObject> violationObjects = new ArrayList<>();
 		// create a parser

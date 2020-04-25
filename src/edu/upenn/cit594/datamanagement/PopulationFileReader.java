@@ -8,14 +8,26 @@ import java.util.Scanner;
 import edu.upenn.cit594.data.PopulationObject;
 import edu.upenn.cit594.logging.Logger;
 
+/**
+ * This class is made to read the populations text file.
+ */
 public class PopulationFileReader {
 	
 	protected String inputFile;
-	
+
+	/**
+	 * Constructor for the population text file reader.
+	 * @param inputFile - the name of the population input file.
+	 */
 	public PopulationFileReader(String inputFile) {
 		this.inputFile = inputFile;
 	}
 
+	/**
+	 * This method reads the population text file and stores each row of the file in a PopulationObject, which is
+	 * stored in an array list format.
+	 * @return - an array list of PopulationObjects.
+	 */
 	public ArrayList<PopulationObject> getPopulationObjects() {
 		ArrayList<PopulationObject> populationObjects  = new ArrayList<>();
 		File inFile = new File(inputFile);

@@ -41,7 +41,7 @@ public class Processor {
 		else {
 			int total = 0;
 			HashSet<String> zipcodeSet = new HashSet<>();
-			for(PopulationObject p : this.populations) {
+			for (PopulationObject p : this.populations) {
 				if(zipcodeSet.contains(p.getZipCode())) {
 					continue;
 				}
@@ -165,9 +165,9 @@ public class Processor {
 					totalMarketValue += Double.parseDouble(p.getMarketValue());
 				}
 			}
-
-			results.put(zipCode, Integer.parseInt(truncate(totalMarketValue/populationOfZipCode, 0)));
-			return Integer.parseInt(truncate(totalMarketValue/populationOfZipCode, 0));
+			double val = totalMarketValue/populationOfZipCode;
+			results.put(zipCode, Integer.parseInt(truncate(val, 0)));
+			return Integer.parseInt(truncate(val, 0));
 		}
 	}
 	
@@ -193,7 +193,7 @@ public class Processor {
 				//check to see if that zipcode has a ticket number in the ticketsHashmap
 				int ticketNumber;
 				//if there was no ticket for that zipcode, set the ticket number to 0
-				if(!ticketsHashMap.containsKey(zipCode)) {
+				if (!ticketsHashMap.containsKey(zipCode)) {
 					ticketNumber = 0;
 				}
 				else {
@@ -201,9 +201,9 @@ public class Processor {
 				}
 				int marketValue = getAverage(new MarketValueComparator(), Integer.parseInt(zipCode));
 				Double ticketPerCapita = ticketNumber / popForZipCode;
-				if(marketValue > budget) {
+				if (marketValue > budget) {
 					continue;
-				}else {
+				} else {
 					safeZipCodeTreeMap.put(zipCode, ticketPerCapita);
 				}
 			}
@@ -212,17 +212,4 @@ public class Processor {
 		}
 	}
 
-
-
-//	used for testing -- delete after
-	public static void main(String[] args) {
-		//must import properties file
-//		CSVPropertyReader cv = new CSVPropertyReader("properties.csv");
-//		Reader r = new JSONFileReader("parking.json");
-//		PopulationFileReader pr = new PopulationFileReader("population.txt");
-//		Processor p = new Processor(r, pr.getPopulationObjects(), cv.getPropertyObjects());
-//		for (Integer zip : p.totalFinePerCapita().keySet()) {
-//			System.out.println(zip + " " + p.totalFinePerCapita().get(zip));
-//		}
-	}
 }

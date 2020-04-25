@@ -2,19 +2,31 @@ package edu.upenn.cit594.datamanagement;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import edu.upenn.cit594.data.ParkingViolationObject;
 import edu.upenn.cit594.logging.Logger;
 
+/**
+ * This class is made to read the CSV file of parking violations and store the information in an array list
+ * for ease of processing.
+ */
 public class CSVFileReader implements Reader {
 	
 	protected String inputFile;
-	
+
+	/**
+	 * Constructor for the CSVFileReader class.
+	 * @param inputFile - the filename that represents the parking file.
+	 */
 	public CSVFileReader(String inputFile) {
 		this.inputFile = inputFile;
 	}
 
+	/**
+	 * This method reads the desired csv parking file and returns an array list of
+	 * ParkingViolationObjects, which is represented from each row in the CSV file.
+	 * @return - an array list of ParkingViolationObjects
+	 */
 	public ArrayList<ParkingViolationObject> getParkingViolationObjects() {
 		ArrayList<ParkingViolationObject> violationObjects = new ArrayList<>();
 		File inFile = new File(inputFile);

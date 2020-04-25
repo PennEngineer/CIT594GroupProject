@@ -6,15 +6,28 @@ import edu.upenn.cit594.logging.Logger;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * This class is made to read the CSV file of properties file and helps manage the data into an array list for
+ * ease of processing.
+ */
 public class CSVPropertyReader {
 
     protected String inputFile;
 
+    /**
+     * Constructor for the CSVPropertyReader
+     * @param fileName - file name that is to be read
+     */
     public CSVPropertyReader(String fileName) {
         this.inputFile = fileName;
     }
 
 
+    /**
+     * This method reads the CSV File, sanitizes the data we need (zip code value, market value, and total
+     * livable area) and stores it in an array list.
+     * @return - an array list of Property objects
+     */
     public ArrayList<Property> getPropertyObjects() {
         ArrayList<Property> properties = new ArrayList<>();
         try {
