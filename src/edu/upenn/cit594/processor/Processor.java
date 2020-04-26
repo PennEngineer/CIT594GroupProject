@@ -32,22 +32,17 @@ public class Processor {
 		this.properties = properties;
 	}
 
-	//step 1 - calculate total population of all zipcodes
+	//step 1 - calculate total population of all ZIP codes
 	public int calculatePopulation() {
-
+		
+		//Memoization technique
 		if (populationResults != -1) {
 			return populationResults;
-		} else {
+		} 
+		else {
 			int total = 0;
-			HashSet<String> zipcodeSet = new HashSet<>();
 			for (PopulationObject p : populations) {
-				if(zipcodeSet.contains(p.getZipCode())) {
-					continue;
-				}
-				else {
-					zipcodeSet.add(p.getZipCode());
-					total += Integer.parseInt(p.getPopulationString());
-				}
+				total += Integer.parseInt(p.getPopulationString());
 			}
 			populationResults = total;
 			return total;
@@ -63,23 +58,23 @@ public class Processor {
 		return popHashMap;
 	}
 
-	//helper method to get total number of tickets per zipcode in hashmap form
+	//helper method to get total # of tickets per ZIP code in HashMap form
 		private HashMap<String, Integer> totalTicketsPerZipCode() {
-			HashMap<String, Integer> ticketsHashMap = new HashMap<>();
+			HashMap<String, Integer> totalTicketsPerZIPCodeHashMap = new HashMap<>();
 			for (ParkingViolationObject p : this.parkingViolations) {
 				if(p.getZipcode() == null) {
 					continue;
 				}
 				else {
-					if(ticketsHashMap.containsKey(p.getZipcode())) {
-						int count = ticketsHashMap.get(p.getZipcode()) + 1;
-						ticketsHashMap.put(p.getZipcode(), count);
+					if(totalTicketsPerZIPCodeHashMap.containsKey(p.getZipcode())) {
+						int count = totalTicketsPerZIPCodeHashMap.get(p.getZipcode()) + 1;
+						totalTicketsPerZIPCodeHashMap.put(p.getZipcode(), count);
 					}else {
-						ticketsHashMap.put(p.getZipcode(), 1);
+						totalTicketsPerZIPCodeHashMap.put(p.getZipcode(), 1);
 					}
 				}
 			}
-			return ticketsHashMap;
+			return totalTicketsPerZIPCodeHashMap;
 		}
 
 	//helper method for aggregating populations by zipcode: total aggregate amount of fines for that zipcode
@@ -130,8 +125,10 @@ public class Processor {
 
 
 	//step 3
+	//Calculate the average market value for a particular ZIP code
 	public int getAverageMarketValue(int zipCode) {
 		int average = Integer.parseInt(truncate(getAverage(zipCode, new MarketValue()), 0));
+		//Memoization technique
 		if (averageMarketValueResults.containsKey(zipCode)) {
 			return averageMarketValueResults.get(zipCode);
 		} else {
@@ -141,8 +138,10 @@ public class Processor {
 	}
 
 	//step 4
+	//Calculate the average total livable area for a particular ZIP code
 	public int getAverageTotalLivableArea(int zipCode) {
 		int average = Integer.parseInt(truncate(getAverage(zipCode, new TotalLivableAreaValue()), 0));
+		//Memoization technique
 		if (averageTotalLivableAreaResults.containsKey(zipCode)) {
 			return averageTotalLivableAreaResults.get(zipCode);
 		} else {
@@ -150,7 +149,8 @@ public class Processor {
 		}
 		return average;
 	}
-
+	
+	//helper method to help with the strategy pattern for method 3 & 4
 	private double getAverage(int zipCode, Value val) {
 		int numOfResidencies = 0;
 		double total = 0;
@@ -167,7 +167,7 @@ public class Processor {
 
 	//step 5 - total residential value per capita
 	public int getMarketValuePerCapita(String zipCode) {
-
+		//Memoization technique
 		if(marketValuePerCapitaResults.containsKey(zipCode)) {
 			return marketValuePerCapitaResults.get(zipCode);
 		}
@@ -197,31 +197,32 @@ public class Processor {
 
 	//6 Display the zip code with the lowest ticket number per capita within the user budget
 	public HashMap<String, Double> safeMethod(double budget) {
-
+		//Memoization technique
 		if(safeMethodResults.containsKey(budget)) {
 			return safeMethodResults.get(budget);
 		}
 		else {
-
-			//get number of tickets per zipcode
+			//get number of tickets per ZIP code
 			HashMap<String, Integer> ticketsHashMap = totalTicketsPerZipCode();
+			//get population for all ZIP codes
 			HashMap<Integer, Double> popHashMap = populationInHashMapForm();
 			HashMap<String, Double> safeZipCodeTreeMap = new HashMap<>();
 
-			//loop through all the zipcodes in the population file
+			//loop through all the ZIP codes in the population file
 			for (Map.Entry<Integer, Double> entry : popHashMap.entrySet()) {
 			    String zipCode = Integer.toString(entry.getKey());
 				Double popForZipCode = entry.getValue();
 
-				//check to see if that zipcode has a ticket number in the ticketsHashmap
 				int ticketNumber;
-				//if there was no ticket for that zipcode, set the ticket number to 0
+				//check to see if the ZIP code has a total ticket # in the ticketsHashmap
 				if (!ticketsHashMap.containsKey(zipCode)) {
+					//if there was no ticket for that ZIP code, set the ticket number to 0
 					ticketNumber = 0;
 				}
 				else {
 					ticketNumber = ticketsHashMap.get(zipCode);
 				}
+				//get the average market value for that ZIP code
 				int marketValue = getAverageMarketValue(Integer.parseInt(zipCode));
 				Double ticketPerCapita = ticketNumber / popForZipCode;
 				if (marketValue > budget) {

@@ -14,7 +14,7 @@ public class Main {
 	public static void main(String[] args) {
 	
 		if (args.length != 5) {
-			System.out.println("Please enter all 5 arguments.");
+			System.out.println("Please start the program again with 5 arguments.");
 			System.exit(0);
 		}
 		if(!args[0].toLowerCase().equals("json") && !args[0].toLowerCase().equals("csv")) {
@@ -47,10 +47,10 @@ public class Main {
 		CSVPropertyReader propertyReader = new CSVPropertyReader(args[2]);
 		PopulationFileReader populationReader = new PopulationFileReader(args[3]);
 		Logger.initializeName(args[4]);
-		Processor processor = new Processor(reader, populationReader.getPopulationObjects(), propertyReader.getPropertyObjects());
-		CommandLineUserInterface commandLineInterface = new CommandLineUserInterface(processor);
 		//Logging when the program starts
 		Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + " " + args[1] + " " + args[2] + " " + args[3]);
+		Processor processor = new Processor(reader, populationReader.getPopulationObjects(), propertyReader.getPropertyObjects());
+		CommandLineUserInterface commandLineInterface = new CommandLineUserInterface(processor);
 		commandLineInterface.start();
 	}
 
