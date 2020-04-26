@@ -23,7 +23,6 @@ public class Processor {
 	private HashMap<Integer, Integer> averageMarketValueResults = new HashMap<>();
 	private HashMap<Integer, Integer> averageTotalLivableAreaResults = new HashMap<>();
 	private HashMap<String, Integer> marketValuePerCapitaResults = new HashMap<>();
-	private HashMap<String, Double> customMethodResults = new HashMap<>();
 	private HashMap<Double, HashMap<String, Double>> safeMethodResults = new HashMap<>();
 
 	public Processor(Reader reader, ArrayList<PopulationObject> pop, ArrayList<Property> properties) {
