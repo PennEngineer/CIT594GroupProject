@@ -18,8 +18,13 @@ public class Processor {
 	protected ArrayList<ParkingViolationObject> parkingViolations;
 	protected ArrayList<PopulationObject> populations;
 	protected ArrayList<Property> properties;
-	private static int populationResults = -1;
-	
+	private int populationResults = -1;
+	private TreeMap<Integer, String> totalFinePerCapitaResults = new TreeMap<>();
+	private HashMap<Integer, Integer> averageMarketValueResults = new HashMap<>();
+	private HashMap<Integer, Integer> averageTotalLivableAreaResults = new HashMap<>();
+	private HashMap<String, Integer> marketValuePerCapitaResults = new HashMap<>();
+	private HashMap<String, Double> customMethodResults = new HashMap<>();
+
 	public Processor(Reader reader, ArrayList<PopulationObject> pop, ArrayList<Property> properties) {
 		this.reader = reader;
 		this.parkingViolations = reader.getParkingViolationObjects();
@@ -29,7 +34,7 @@ public class Processor {
 
 	//step 1 - calculate total population of all zipcodes
 	public int calculatePopulation() {
-		
+
 		if (populationResults != -1) {
 			return populationResults;
 		} else {
@@ -57,7 +62,7 @@ public class Processor {
 		}
 		return popHashMap;
 	}
-	
+
 	//helper method to get total number of tickets per zipcode in hashmap form
 		private HashMap<String, Integer> totalTicketsPerZipCode() {
 			HashMap<String, Integer> ticketsHashMap = new HashMap<>();
@@ -106,35 +111,44 @@ public class Processor {
 	//step 2 -- calculate total fine per capita
 	//use of tree map to sort key of zipcodes
 	public TreeMap<Integer, String> totalFinePerCapita() {
-		
-		Map<String, TreeMap<Integer,String>> results = new HashMap<>();
-		if(results.containsKey("answer")) {
-			return results.get("answer");
+
+		if (!totalFinePerCapitaResults.isEmpty()) {
+			return totalFinePerCapitaResults;
 		}
-			else {
-			TreeMap<Integer, String> sortedTotalFinesPerCapitaByZipCode = new TreeMap<>();
-			for (Integer zipCode : totalAggregateFineByZipCode().keySet()) {
-				if (populationInHashMapForm().containsKey(zipCode)) {
-					double zipCodePopulation = populationInHashMapForm().get(zipCode);
-					double fineInZipCode = totalAggregateFineByZipCode().get(zipCode);
-					double zipCodeFinePerCapita = fineInZipCode/zipCodePopulation;
-					sortedTotalFinesPerCapitaByZipCode.put(zipCode, truncate(zipCodeFinePerCapita, 4));
-				}
+		TreeMap<Integer, String> sortedTotalFinesPerCapitaByZipCode = new TreeMap<>();
+		for (Integer zipCode : totalAggregateFineByZipCode().keySet()) {
+			if (populationInHashMapForm().containsKey(zipCode)) {
+				double zipCodePopulation = populationInHashMapForm().get(zipCode);
+				double fineInZipCode = totalAggregateFineByZipCode().get(zipCode);
+				double zipCodeFinePerCapita = fineInZipCode / zipCodePopulation;
+				sortedTotalFinesPerCapitaByZipCode.put(zipCode, truncate(zipCodeFinePerCapita, 4));
 			}
-			results.put("answer", sortedTotalFinesPerCapitaByZipCode);
-			return sortedTotalFinesPerCapitaByZipCode;
 		}
+		totalFinePerCapitaResults = sortedTotalFinesPerCapitaByZipCode;
+		return sortedTotalFinesPerCapitaByZipCode;
 	}
 
 
 	//step 3
 	public int getAverageMarketValue(int zipCode) {
-		return Integer.parseInt(truncate(getAverage(zipCode, new MarketValue()), 0));
+		int average = Integer.parseInt(truncate(getAverage(zipCode, new MarketValue()), 0));
+		if (averageMarketValueResults.containsKey(zipCode)) {
+			return averageMarketValueResults.get(zipCode);
+		} else {
+			averageMarketValueResults.put(zipCode, average);
+		}
+		return average;
 	}
 
 	//step 4
 	public int getAverageTotalLivableArea(int zipCode) {
-		return Integer.parseInt(truncate(getAverage(zipCode, new TotalLivableAreaValue()), 0));
+		int average = Integer.parseInt(truncate(getAverage(zipCode, new TotalLivableAreaValue()), 0));
+		if (averageTotalLivableAreaResults.containsKey(zipCode)) {
+			return averageTotalLivableAreaResults.get(zipCode);
+		} else {
+			averageTotalLivableAreaResults.put(zipCode, average);
+		}
+		return average;
 	}
 
 	private double getAverage(int zipCode, Value val) {
@@ -147,53 +161,43 @@ public class Processor {
 				numOfResidencies++;
 			}
 		}
-		double average = total/numOfResidencies;
-		return average;
+		return total/numOfResidencies;
 	}
 
-//
-//	//step 3 & 4 -- calculate average market value or total livable area by number of residences
-//	public int getAverage(AverageComparator comparator, int zipcode) {
-//
-//		return Integer.parseInt(truncate(comparator.getAverage(properties, zipcode),0));
-//	}
-	
+
 	//step 5 - total residential value per capita
 	public int getMarketValuePerCapita(String zipCode) {
 
-		Map<String, Integer> results = new HashMap<>();
-		if(results.containsKey(zipCode)) {
-			return results.get(zipCode);
+		if(marketValuePerCapitaResults.containsKey(zipCode)) {
+			return marketValuePerCapitaResults.get(zipCode);
 		}
-		else {
-			
-			double totalMarketValue = 0;
-			String regex = "^[0-9]{5}$";
-			//if it does not meet the zip-code criteria
-			if (zipCode == null || zipCode.isEmpty() || !zipCode.matches(regex)) {
-				return 0;
-			}
-			//if the zip-code is not in the population file containing all zipcodes
-			if (!populationInHashMapForm().containsKey(Integer.parseInt(zipCode))) {
-				return 0;
-			}
-			int zipCodeValue = Integer.parseInt(zipCode);
-			double populationOfZipCode = populationInHashMapForm().get(zipCodeValue);
-			for (Property p : this.properties) {
-				//if zipcode value matches, add to totalMarketValue
-				if (p.getZipCode().equals(zipCode)) {
-					totalMarketValue += Double.parseDouble(p.getMarketValue());
-				}
-			}
-			double val = totalMarketValue/populationOfZipCode;
-			results.put(zipCode, Integer.parseInt(truncate(val, 0)));
-			return Integer.parseInt(truncate(val, 0));
+		double totalMarketValue = 0;
+		String regex = "^[0-9]{5}$";
+		//if it does not meet the zip-code criteria
+		if (zipCode == null || zipCode.isEmpty() || !zipCode.matches(regex)) {
+			return 0;
 		}
+		//if the zip-code is not in the population file containing all zipcodes
+		if (!populationInHashMapForm().containsKey(Integer.parseInt(zipCode))) {
+			return 0;
+		}
+		int zipCodeValue = Integer.parseInt(zipCode);
+		double populationOfZipCode = populationInHashMapForm().get(zipCodeValue);
+		for (Property p : this.properties) {
+			//if zipcode value matches, add to totalMarketValue
+			if (p.getZipCode().equals(zipCode)) {
+				totalMarketValue += Double.parseDouble(p.getMarketValue());
+			}
+		}
+		double val = totalMarketValue/populationOfZipCode;
+		int finalValue = Integer.parseInt(truncate(val, 0));
+		marketValuePerCapitaResults.put(zipCode, finalValue);
+		return finalValue;
 	}
-	
+
 	//6 Display the zip code with the lowest ticket number per capita within the user budget
 	public HashMap<String, Double> safeMethod(double budget) {
-		
+
 		Map<Double, HashMap<String, Double>> results = new HashMap<>();
 		if(results.containsKey(budget)) {
 			return results.get(budget);
@@ -204,12 +208,12 @@ public class Processor {
 			HashMap<String, Integer> ticketsHashMap = totalTicketsPerZipCode();
 			HashMap<Integer, Double> popHashMap = populationInHashMapForm();
 			HashMap<String, Double> safeZipCodeTreeMap = new HashMap<>();
-			
+
 			//loop through all the zipcodes in the population file
 			for (Map.Entry<Integer, Double> entry : popHashMap.entrySet()) {
 			    String zipCode = Integer.toString(entry.getKey());
 				Double popForZipCode = entry.getValue();
-				
+
 				//check to see if that zipcode has a ticket number in the ticketsHashmap
 				int ticketNumber;
 				//if there was no ticket for that zipcode, set the ticket number to 0
