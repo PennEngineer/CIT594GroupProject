@@ -125,8 +125,10 @@ public class Processor {
 
 
 	//step 3
+	//Calculate the average market value for a particular ZIP code
 	public int getAverageMarketValue(int zipCode) {
 		int average = Integer.parseInt(truncate(getAverage(zipCode, new MarketValue()), 0));
+		//Memoization technique
 		if (averageMarketValueResults.containsKey(zipCode)) {
 			return averageMarketValueResults.get(zipCode);
 		} else {
@@ -136,8 +138,10 @@ public class Processor {
 	}
 
 	//step 4
+	//Calculate the average total livable area for a particular ZIP code
 	public int getAverageTotalLivableArea(int zipCode) {
 		int average = Integer.parseInt(truncate(getAverage(zipCode, new TotalLivableAreaValue()), 0));
+		//Memoization technique
 		if (averageTotalLivableAreaResults.containsKey(zipCode)) {
 			return averageTotalLivableAreaResults.get(zipCode);
 		} else {
@@ -145,7 +149,8 @@ public class Processor {
 		}
 		return average;
 	}
-
+	
+	//helper method to help with the strategy pattern for method 3 & 4
 	private double getAverage(int zipCode, Value val) {
 		int numOfResidencies = 0;
 		double total = 0;
@@ -162,7 +167,7 @@ public class Processor {
 
 	//step 5 - total residential value per capita
 	public int getMarketValuePerCapita(String zipCode) {
-
+		//Memoization technique
 		if(marketValuePerCapitaResults.containsKey(zipCode)) {
 			return marketValuePerCapitaResults.get(zipCode);
 		}
@@ -192,7 +197,7 @@ public class Processor {
 
 	//6 Display the zip code with the lowest ticket number per capita within the user budget
 	public HashMap<String, Double> safeMethod(double budget) {
-
+		//Memoization technique
 		if(safeMethodResults.containsKey(budget)) {
 			return safeMethodResults.get(budget);
 		}
