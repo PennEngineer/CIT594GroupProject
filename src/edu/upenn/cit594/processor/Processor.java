@@ -32,7 +32,7 @@ public class Processor {
 		this.properties = properties;
 	}
 
-	//step 1 - calculate total population of all zipcodes
+	//step 1 - calculate total population of all ZIP codes
 	public int calculatePopulation() {
 		
 		//Memoization technique
@@ -58,23 +58,23 @@ public class Processor {
 		return popHashMap;
 	}
 
-	//helper method to get total number of tickets per zipcode in hashmap form
+	//helper method to get total # of tickets per ZIP code in HashMap form
 		private HashMap<String, Integer> totalTicketsPerZipCode() {
-			HashMap<String, Integer> ticketsHashMap = new HashMap<>();
+			HashMap<String, Integer> totalTicketsPerZIPCodeHashMap = new HashMap<>();
 			for (ParkingViolationObject p : this.parkingViolations) {
 				if(p.getZipcode() == null) {
 					continue;
 				}
 				else {
-					if(ticketsHashMap.containsKey(p.getZipcode())) {
-						int count = ticketsHashMap.get(p.getZipcode()) + 1;
-						ticketsHashMap.put(p.getZipcode(), count);
+					if(totalTicketsPerZIPCodeHashMap.containsKey(p.getZipcode())) {
+						int count = totalTicketsPerZIPCodeHashMap.get(p.getZipcode()) + 1;
+						totalTicketsPerZIPCodeHashMap.put(p.getZipcode(), count);
 					}else {
-						ticketsHashMap.put(p.getZipcode(), 1);
+						totalTicketsPerZIPCodeHashMap.put(p.getZipcode(), 1);
 					}
 				}
 			}
-			return ticketsHashMap;
+			return totalTicketsPerZIPCodeHashMap;
 		}
 
 	//helper method for aggregating populations by zipcode: total aggregate amount of fines for that zipcode
