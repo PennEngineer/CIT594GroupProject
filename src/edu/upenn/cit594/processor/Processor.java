@@ -34,20 +34,15 @@ public class Processor {
 
 	//step 1 - calculate total population of all zipcodes
 	public int calculatePopulation() {
-
+		
+		//Memoization technique
 		if (populationResults != -1) {
 			return populationResults;
-		} else {
+		} 
+		else {
 			int total = 0;
-			HashSet<String> zipcodeSet = new HashSet<>();
 			for (PopulationObject p : populations) {
-				if(zipcodeSet.contains(p.getZipCode())) {
-					continue;
-				}
-				else {
-					zipcodeSet.add(p.getZipCode());
-					total += Integer.parseInt(p.getPopulationString());
-				}
+				total += Integer.parseInt(p.getPopulationString());
 			}
 			populationResults = total;
 			return total;
