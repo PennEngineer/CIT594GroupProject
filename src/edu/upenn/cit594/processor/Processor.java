@@ -151,7 +151,7 @@ public class Processor {
 	}
 	
 	//helper method to help with the strategy pattern for method 3 & 4
-	private double getAverage(int zipCode, Value val) {
+	public double getAverage(int zipCode, Value val) {
 		int numOfResidencies = 0;
 		double total = 0;
 		for (Property p : this.properties) {
@@ -160,6 +160,9 @@ public class Processor {
 				total += Double.parseDouble(val.value(p));
 				numOfResidencies++;
 			}
+		}
+		if (numOfResidencies == 0) {
+			return 0;
 		}
 		return total/numOfResidencies;
 	}

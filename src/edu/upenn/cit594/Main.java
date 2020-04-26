@@ -48,7 +48,7 @@ public class Main {
 		PopulationFileReader populationReader = new PopulationFileReader(args[3]);
 		Logger.initializeName(args[4]);
 		//Logging when the program starts
-		Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + " " + args[1] + " " + args[2] + " " + args[3]);
+		Logger.getInstance().log(Long.toString(System.currentTimeMillis()) + " " + args[0] + " " + args[1] + " " + args[2] + " " + args[3] + " " + args[4]);
 		Processor processor = new Processor(reader, populationReader.getPopulationObjects(), propertyReader.getPropertyObjects());
 		CommandLineUserInterface commandLineInterface = new CommandLineUserInterface(processor);
 		commandLineInterface.start();
