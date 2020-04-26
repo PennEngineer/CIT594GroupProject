@@ -24,6 +24,7 @@ public class Processor {
 	private HashMap<Integer, Integer> averageTotalLivableAreaResults = new HashMap<>();
 	private HashMap<String, Integer> marketValuePerCapitaResults = new HashMap<>();
 	private HashMap<String, Double> customMethodResults = new HashMap<>();
+	private HashMap<Double, HashMap<String, Double>> safeMethodResults = new HashMap<>();
 
 	public Processor(Reader reader, ArrayList<PopulationObject> pop, ArrayList<Property> properties) {
 		this.reader = reader;
@@ -198,9 +199,8 @@ public class Processor {
 	//6 Display the zip code with the lowest ticket number per capita within the user budget
 	public HashMap<String, Double> safeMethod(double budget) {
 
-		Map<Double, HashMap<String, Double>> results = new HashMap<>();
-		if(results.containsKey(budget)) {
-			return results.get(budget);
+		if(safeMethodResults.containsKey(budget)) {
+			return safeMethodResults.get(budget);
 		}
 		else {
 
@@ -231,7 +231,7 @@ public class Processor {
 					safeZipCodeTreeMap.put(zipCode, ticketPerCapita);
 				}
 			}
-			results.put(budget, safeZipCodeTreeMap);
+			safeMethodResults.put(budget, safeZipCodeTreeMap);
 			return safeZipCodeTreeMap;
 		}
 	}
