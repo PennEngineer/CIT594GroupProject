@@ -25,7 +25,9 @@ public class CSVPropertyReader {
 
     /**
      * This method reads the CSV File, sanitizes the data we need (zip code value, market value, and total
-     * livable area) and stores it in an array list.
+     * livable area) and stores it in an array list. We start by reading the first row for the required values that we need,
+     * and then targeting those columns using a regex that splits the values we need into a String array. Then, we create the
+     * Property object with those values.
      * @return - an array list of Property objects
      */
     public ArrayList<Property> getPropertyObjects() {
@@ -64,6 +66,7 @@ public class CSVPropertyReader {
                 }
             }
         } catch (FileNotFoundException e) {
+            System.err.println("File was not found.");
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();

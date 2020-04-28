@@ -10,11 +10,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * This class is the User Interface tier for the program. It helps process the information that is displayed to the user.
+ */
 public class CommandLineUserInterface {
 
     protected Processor processor;
     protected Scanner in;
 
+    /**
+     * Constructor for the class, used in the Main class.
+     * @param processor - the processor that makes calculations on the data
+     */
     public CommandLineUserInterface(Processor processor) {
         this.processor = processor;
         in = new Scanner(System.in);
@@ -52,7 +59,10 @@ public class CommandLineUserInterface {
     }
 
 
-    //choice 1
+    /**
+     * Choice 1
+     * This method displays the total population for all the zip codes in the population.txt file.
+     */
     protected void doTotalPopulationForAllZipCodes() {
         //calculate total population for all ZIP codes
         System.out.println(processor.calculatePopulation());
@@ -60,7 +70,10 @@ public class CommandLineUserInterface {
         start();
     }
 
-    //choice 2
+    /**
+     * Choice 2
+     * This method prints the total parking fines per capita according to zip code in ascending order.
+     */
     protected void doParkingFinesPerCapitaForAllZipCodes() {
         //calculate "ZIPCODE fine", i.e. 19103 0.0284 (truncated)
         for (Integer zip : processor.totalFinePerCapita().keySet()) {
@@ -71,7 +84,10 @@ public class CommandLineUserInterface {
         start();
     }
 
-    //choice 3
+    /**
+     * Choice 3
+     * This method prints the average residential market value for the zip code that is provided from the user.
+     */
     protected void doAverageResidentialMarketValue() {
         System.out.println("Please enter a ZIP code.");
         //if user enters an incorrect zip code, or a zip code not valid in the input files, display 0.
@@ -87,7 +103,10 @@ public class CommandLineUserInterface {
         start();
     }
 
-    //choice 4
+    /**
+     * Choice 4
+     * This method prints the average total livable area value for the zip code that is provided from the user.
+     */
     protected void doAverageTotalLivableArea() {
         System.out.println("Please enter a ZIP code.");
         //if user enters an incorrect zip code, or a zip code not valid in the input files, display 0.
@@ -103,7 +122,10 @@ public class CommandLineUserInterface {
         start();
     }
 
-    //choice 5
+    /**
+     * Choice 5
+     * This method prints the total residential market value per capita according to a zip code that is provided by the user.
+     */
     protected void doTotalResidentialMarketValuePerCapita() {
         System.out.println("Please enter a ZIP code.");
         //if user enters an incorrect zip code, or a zip code not valid in the input files, display 0.
@@ -119,7 +141,11 @@ public class CommandLineUserInterface {
         start();
     }
 
-    //choice 6
+    /**
+     * Choice 6
+     * This method prints out the values that is less than or equal to the provided budget from the user. It displays all the zip codes
+     * that match that budget and the number of tickets per capita for that zip code.
+     */
     protected void doCustom() {
     	System.out.println("Please enter your preferred market value budget.");
         String budget = in.next();
@@ -139,8 +165,12 @@ public class CommandLineUserInterface {
       //re-prompt user
         start();
     }
-    
-    //helper method to check if the number is a number
+
+    /**
+     * This is a helper method to check if a number is a number.
+     * @param input - value to be checked.
+     * @return - true or false if a number is a number.
+     */
     private boolean isNumeric(String input) {
         boolean isNumeric = true;
         try {

@@ -9,6 +9,10 @@ import edu.upenn.cit594.datamanagement.Reader;
 import edu.upenn.cit594.processor.Processor;
 import edu.upenn.cit594.ui.CommandLineUserInterface;
 
+/**
+ * Main class of the program. Creates the objects necessary for data management,
+ * processing, and the displaying of information.
+ */
 public class Main {
 
 	public static void main(String[] args) {
@@ -53,6 +57,5 @@ public class Main {
 		CommandLineUserInterface commandLineInterface = new CommandLineUserInterface(processor);
 		commandLineInterface.start();
 	}
-
 
 }

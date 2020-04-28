@@ -24,7 +24,8 @@ public class CSVFileReader implements Reader {
 
 	/**
 	 * This method reads the desired csv parking file and returns an array list of
-	 * ParkingViolationObjects, which is represented from each row in the CSV file.
+	 * ParkingViolationObjects, which is represented from each row in the CSV file. If a row does not have
+	 * the required information, we skip the row.
 	 * @return - an array list of ParkingViolationObjects
 	 */
 	public ArrayList<ParkingViolationObject> getParkingViolationObjects() {
