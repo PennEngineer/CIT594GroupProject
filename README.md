@@ -7,7 +7,7 @@ and output interesting answers to questions such as:
 
 # Motivation
 
-The project is aimed to write software with clean and efficient design, while also developing an understanding of data analysis using proper data structures in Java , analyzing both time and space complexities.
+The project is aimed at learning how to write software with clean and efficient design, while also developing an understanding of data analysis using proper data structures in Java and analyzing both time and space complexities.
 
 # How to use
 
