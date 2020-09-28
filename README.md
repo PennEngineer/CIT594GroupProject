@@ -22,7 +22,7 @@ We designed the software based on 5 tier architectural design split into **Data*
 
 # How to use
 
-After downloading the files, supply 
+After downloading the files, supply the program with 5 run-time arguments: the file format of the parking data, the name of the parking data, and 
 
 # Screenshots
 
