@@ -8,3 +8,10 @@ and output interesting answers to questions such as:
 # Motivation
 
 The project is aimed to write software with clean and efficient design, while also developing an understanding of data analysis using proper data structures in Java , analyzing both time and space complexities.
+
+# How to use
+
+Simply download the files and run the program. The program will output questions in the terminal of your IDE. Answering the questions will result in pulling data based on your answer.
+
+# Screenshots
+
