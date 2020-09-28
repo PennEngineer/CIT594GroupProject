@@ -1,9 +1,12 @@
 # Parking Data Analysis (CIT 594 Project)
 
 This project revolves around using data structures, software design, and parsing tools to analyze large parking data (CSV) files from OpenDataPhilly
-and output interesting answers to questions such as:
-- a
-
+and output interesting answers to:
+- Population based on ZIP code
+- Total fine per capita 
+- Average market value based on ZIP Code
+- Average total Livable Area based on ZIP Code
+- ZIP Code with the lowest ticket number per capita within the budget specified
 
 # Motivation
 
@@ -19,7 +22,7 @@ We designed the software based on 5 tier architectural design split into **Data*
 
 # How to use
 
-Simply download the files and run the program. The program will output questions in the terminal of your IDE. Answering the questions will result in pulling data based on your answer.
+After downloading the files, supply 
 
 # Screenshots
 
