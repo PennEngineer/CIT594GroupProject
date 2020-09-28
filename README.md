@@ -1,6 +1,6 @@
 # Parking Data Analysis (CIT 594 Project)
 
-This project revolves around using data structures, software design, and parsing tools to analyze large parking data (CSV) files
+This project revolves around using data structures, software design, and parsing tools to analyze large parking data (CSV) files from OpenDataPhilly
 and output interesting answers to questions such as:
 - a
 
